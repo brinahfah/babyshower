@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Liste des cadeaux - Baby Shower</title>
+
+    <link rel="stylesheet" href="CSS/cadeaux.css">
+</head>
+
+<body>
+
+    <header class="page-header">
+        <h1>♡ Liste des cadeaux ♡</h1>
+        <p>Un petit geste pour accueillir notre merveille...</p>
+    </header>
+
+    <main class="container">
+
+        <!-- MODE D'EMPLOI -->
+        <section id="modeEmploi" class="modal-overlay">
+
+            <div class="modal-content">
+
+                <h2>♡ Avant de commencer ♡</h2>
+
+                <p>
+                    Nous vous remercions de participer à
+                    cette belle aventure !
+                </p>
+
+                <p>
+                    Voici quelques informations importantes
+                    avant de choisir votre cadeau :
+                </p>
+
+                <ul>
+                    <li>Chaque invité peut choisir un seul cadeau.</li>
+                    <li>Certains cadeaux sont limités à 5 personnes.</li>
+                    <li>Les enveloppes, couches et lingettes ne sont pas limitées.</li>
+                    <li>Une fois la limite atteinte, le cadeau ne sera plus disponible.</li>
+                    <li>Vous devrez renseigner votre nom et votre prénom pour confirmer votre choix.</li>
+                    <li>Vous pourrez également laisser un message dans le carnet à souhaits.</li>
+                </ul>
+
+                <button id="btnCommencer">
+                    Découvrir les cadeaux ♡
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- LISTE DES CADEAUX -->
+        <section id="sectionCadeaux" class="cadeaux-section" hidden>
+
+            <h2>Choisissez votre cadeau</h2>
+
+            <p class="description">
+                Choisissez le cadeau qui vous ferait plaisir
+                d'offrir aux futurs parents.
+            </p>
+
+            <div id="listeCadeaux" class="cadeaux-grid">
+
+                <p>Chargement des cadeaux...</p>
+
+            </div>
+
+        </section>
+
+
+        <!-- FORMULAIRE INVITE -->
+        <section id="sectionInscription" hidden>
+
+            <h2>Vos informations</h2>
+
+            <p id="cadeauSelectionne"></p>
+
+            <form id="formInvite">
+
+                <div class="form-group">
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="prenom">Prénom</label>
+                    <input type="text" id="prenom" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Votre souhait pour les parents (facultatif)</label>
+                    <textarea id="message" rows="4"></textarea>
+                </div>
+
+                <div class="conditions">
+
+                    <p>
+                        En validant, vous reconnaissez avoir pris
+                        connaissance de nos
+                        <a href="confidentialite.html" target="_blank">
+                            informations sur les données personnelles
+                        </a>
+                        et de nos conditions d'utilisation.
+                    </p>
+
+                    <label>
+                        <input type="checkbox" id="acceptConditions" required>
+                        J'accepte les conditions d'utilisation.
+                    </label>
+
+                </div>
+
+                <button type="submit">
+                    Confirmer ma réservation
+                </button>
+
+            </form>
+
+        </section>
+
+
+        
+        <!-- CONFIRMATION -->
+        <section id="confirmation" class="confirmation-section" hidden>
+
+            <div class="confirmation-card">
+
+                <div class="confirmation-icon">
+                    ♡
+                </div>
+
+                <h2>Merci pour votre générosité !</h2>
+
+                <p class="confirmation-success">
+                    ✓ Votre réservation a bien été enregistrée !
+                </p>
+
+                <p>
+                    Votre choix de cadeau a été confirmé auprès
+                    des futurs parents.
+                </p>
+
+                <div class="confirmation-cadeau">
+
+                    <span>Votre cadeau choisi :</span>
+
+                    <h3 id="messageConfirmation"></h3>
+
+                </div>
+
+                <p class="confirmation-final">
+                    Nous vous remercions de contribuer à
+                    accueillir notre merveille. ♡
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+    <script type="module" src="JS/cadeaux.js"></script>
+
+</body>
+</html>

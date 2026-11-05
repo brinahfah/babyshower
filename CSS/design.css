@@ -291,3 +291,25 @@ body {
     }
 
 }
+
+/* BOUTON ACCES AUX CADEAUX */
+
+.gift-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 22px;
+
+    background: #a87535;
+    color: white;
+
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 30px;
+
+    transition: all 0.3s ease;
+}
+
+.gift-button:hover {
+    background: #87613d;
+    transform: translateY(-3px);
+}
