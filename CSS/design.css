@@ -1,0 +1,293 @@
+
+/* STYLE GENERAL */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #e9d8c2;
+    font-family: Georgia, serif;
+    overflow-x: hidden;
+}
+
+.instruction {
+    color: #87613d;
+    margin-bottom: 25px;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+
+/* CONTENEUR DE LA CARTE */
+
+.card-container {
+    width: min(90vw, 390px);
+    aspect-ratio: 2 / 3;
+    perspective: 1500px;
+    cursor: pointer;
+}
+
+
+/* CARTE */
+
+.card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 1.3s ease-in-out;
+}
+
+
+/* ROTATION */
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+
+/* LES DEUX FACES */
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 15px;
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+
+    box-shadow: 0 15px 40px rgba(75, 49, 25, 0.25);
+}
+
+
+/* RECTO : IMAGE */
+
+.front {
+    background: white;
+}
+
+.front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+/* VERSO : FOND BEIGE */
+
+.back {
+    transform: rotateY(180deg);
+
+    background: linear-gradient(
+        145deg,
+        #f8eee0,
+        #e8d2b6,
+        #f6eadb
+    );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    text-align: center;
+}
+
+
+/* CONTENU DU VERSO */
+
+.invitation-content {
+    opacity: 0;
+    transform: translateY(20px);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+
+    transition-delay: 0.8s;
+
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.card.flipped .invitation-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* TITRE */
+
+.invitation-content h1 {
+    color: #a87535;
+    font-size: clamp(30px, 8vw, 40px);
+    font-style: italic;
+    margin-bottom: 12px;
+}
+
+.decoration {
+    color: #bd8a48;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+
+/* TEXTE DE BIENVENUE */
+
+.welcome {
+    color: #88613e;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 22px;
+}
+
+
+/* INFORMATIONS */
+
+.information {
+    margin: 15px 0;
+    color: #745337;
+}
+
+.information h2 {
+    font-size: 17px;
+    color: #a87535;
+    margin-bottom: 6px;
+}
+
+.information p {
+    font-size: 15px;
+}
+
+
+/* MESSAGE FINAL */
+
+.closing {
+    margin-top: 25px;
+    color: #a87535;
+    font-size: 18px;
+    font-style: italic;
+}
+
+
+/* PAILLETTES */
+
+.sparkle {
+    position: absolute;
+    color: #ffffff;
+    font-size: 18px;
+    opacity: 0;
+    z-index: 1;
+
+    text-shadow:
+        0 0 5px #fff,
+        0 0 10px #e8b95e,
+        0 0 20px #d9a441;
+
+    pointer-events: none;
+}
+
+.card.flipped .sparkle {
+    animation: glitter 2.5s infinite ease-in-out;
+}
+
+
+/* POSITION DES PAILLETTES */
+
+.sparkle:nth-child(1) {
+    top: 10%;
+    left: 15%;
+    animation-delay: 0.2s;
+}
+
+.sparkle:nth-child(2) {
+    top: 20%;
+    right: 12%;
+    animation-delay: 0.8s;
+}
+
+.sparkle:nth-child(3) {
+    top: 45%;
+    left: 8%;
+    animation-delay: 1.2s;
+}
+
+.sparkle:nth-child(4) {
+    top: 60%;
+    right: 10%;
+    animation-delay: 0.5s;
+}
+
+.sparkle:nth-child(5) {
+    bottom: 12%;
+    left: 20%;
+    animation-delay: 1.5s;
+}
+
+.sparkle:nth-child(6) {
+    bottom: 15%;
+    right: 20%;
+    animation-delay: 0.9s;
+}
+
+.sparkle:nth-child(7) {
+    top: 35%;
+    right: 25%;
+    animation-delay: 1.7s;
+}
+
+
+/* ANIMATION DES PAILLETTES */
+
+@keyframes glitter {
+
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.5) rotate(0deg);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.5) rotate(45deg);
+    }
+
+}
+
+
+/* TEXTE SOUS LA CARTE */
+
+.touch-message {
+    margin-top: 25px;
+    color: #87613d;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+
+/* ACCESSIBILITE */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .card,
+    .invitation-content {
+        transition-duration: 0.01ms;
+    }
+
+    .card.flipped .sparkle {
+        animation: none;
+        opacity: 0.8;
+    }
+
+}
