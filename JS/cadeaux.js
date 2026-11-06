@@ -263,7 +263,7 @@ if (sessionData.session) {
 
 
 // ==========================================
-// 12. Fonction reserver cdeau
+// 12. Fonction reserver cadeau
 // ==========================================
 
 async function reserverCadeau(nom, prenom, telephone, idCadeau, message) {
