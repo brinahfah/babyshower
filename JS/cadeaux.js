@@ -128,6 +128,93 @@ function compterReservations(idCadeau) {
 }
 
 // ==========================================
+// 6 BIS. ATTRIBUER UN STICKER AUX CADEAUX
+// ==========================================
+
+// ==========================================
+// STICKERS REPRESENTATIFS DES CADEAUX
+// ==========================================
+
+function obtenirSticker(nom) {
+    const cadeau = nom.toLowerCase();
+
+    if (cadeau.includes("siège auto")) {
+        return "";
+    }
+
+    if (cadeau.includes("sac de maternité")) {
+        return "";
+    }
+
+    if (cadeau.includes("bavoir") ||
+        cadeau.includes("bonnet") ||
+        cadeau.includes("chaussette")) {
+        return "";
+    }
+
+    if (cadeau.includes("biberon") ||
+        cadeau.includes("tétine") ||
+        cadeau.includes("chauffe-biberon")) {
+        return "🍼";
+    }
+
+    if (cadeau.includes("drap") ||
+        cadeau.includes("serviette") ||
+        cadeau.includes("couverture")) {
+        return "🛏️";
+    }
+
+    if (cadeau.includes("poussette")) {
+        return "";
+    }
+
+    if (cadeau.includes("toilette") ||
+        cadeau.includes("biolane") ||
+        cadeau.includes("mustela")) {
+        return "🧴";
+    }
+
+    if (cadeau.includes("vêtement")) {
+        return "";
+    }
+
+    if (cadeau.includes("lait")) {
+        return "🥛";
+    }
+
+    if (cadeau.includes("cadeau au choix")) {
+        return "🎁";
+    }
+
+    if (cadeau.includes("lingette")) {
+        return "";
+    }
+
+    if (cadeau.includes("peluche") ||
+        cadeau.includes("coussin")) {
+        return "🧸";
+    }
+
+    if (cadeau.includes("couche")) {
+        return "";
+    }
+
+    if (cadeau.includes("tapis de veille")) {
+        return "";
+    }
+
+    if (cadeau.includes("jouet")) {
+        return "";
+    }
+
+    if (cadeau.includes("enveloppe")) {
+        return "💌";
+    }
+
+    return "🎀";
+}
+
+// ==========================================
 // 7. AFFICHER LES CADEAUX
 // ==========================================
 
@@ -165,10 +252,21 @@ function afficherCadeaux() {
             carte.classList.add("indisponible");
         }
 
+        // Sticker du cadeau
+        const sticker = document.createElement("div");
+
+        sticker.classList.add("cadeau-sticker");
+
+        sticker.textContent = obtenirSticker(cadeau.nom);
+
+        sticker.setAttribute("aria-hidden", "true");
+
+
         // Nom du cadeau
         const titre = document.createElement("h3");
 
         titre.textContent = cadeau.nom;
+        
 
         // Disponibilité
         const disponibilite = document.createElement("p");
@@ -212,6 +310,7 @@ function afficherCadeaux() {
 
         }
 
+        carte.appendChild(sticker);
         carte.appendChild(titre);
         carte.appendChild(disponibilite);
         carte.appendChild(bouton);

@@ -668,3 +668,42 @@ button:disabled {
     }
 
 }
+
+/* ==========================================
+   STICKERS DES CADEAUX
+========================================== */
+
+.cadeau-sticker {
+    width: 85px;
+    height: 85px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 15px;
+
+    background: linear-gradient(
+        145deg,
+        #fffaf2,
+        #f1e4d4
+    );
+
+    border: 2px solid #ead8c5;
+    border-radius: 50%;
+
+    font-size: 2.8rem;
+
+    box-shadow:
+        0 5px 12px rgba(130, 100, 75, 0.12);
+
+    transform: rotate(-5deg);
+
+    transition: transform 0.3s ease;
+}
+
+/* Petite animation au survol */
+
+.cadeau-card:hover .cadeau-sticker {
+    transform: rotate(5deg) scale(1.1);
+}
