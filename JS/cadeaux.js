@@ -23,6 +23,7 @@ const champNom = document.getElementById("nom");
 const champPrenom = document.getElementById("prenom");
 const champMessage = document.getElementById("message");
 const acceptConditions = document.getElementById("acceptConditions");
+const champTelephone = document.getElementById("telephone");
 
 // ==========================================
 // 2. VARIABLES
@@ -243,238 +244,114 @@ function selectionnerCadeau(cadeau) {
 
 }
 
-// ==========================================
-// 9. ENREGISTRER L'INVITE
-// ==========================================
+// TEST DU ROLE SUPABASE
 
-async function enregistrerInvite(nom, prenom) {
+const { data: sessionData, error: sessionError } =
+    await supabase.auth.getSession();
 
-    const { data, error } = await supabase
-        .from("invite")
-        .insert([
-            {
-                nom: nom,
-                prenom: prenom
-            }
-        ])
-        .select("id_invite")
-        .single();
+console.log("SESSION SUPABASE :", sessionData.session);
+console.log("ERREUR SESSION :", sessionError);
 
-    if (error) {
-        throw error;
-    }
-
-    console.log("INVITE ENREGISTRE :", data);
-
-    return data.id_invite;
-
+if (sessionData.session) {
+    console.log("UTILISATEUR CONNECTE");
+} else {
+    console.log("UTILISATEUR ANONYME");
 }
 
-// ==========================================
-// 10. ENREGISTRER LA RESERVATION
-// ==========================================
 
-async function enregistrerReservation(idInvite, idCadeau) {
 
-    const { data, error } = await supabase
-        .from("reservation")
-        .insert([
-            {
-                id_invite: idInvite,
-                id_cadeau: idCadeau
-            }
-        ])
-        .select()
-        .single();
 
-    if (error) {
-        throw error;
-    }
-
-    console.log("RESERVATION ENREGISTREE :", data);
-
-    return data;
-
-}
 
 // ==========================================
-// 11. ENREGISTRER LE SOUHAIT
+// 12. Fonction reserver cdeau
 // ==========================================
 
-async function enregistrerSouhait(idInvite, message) {
+async function reserverCadeau(nom, prenom, telephone, idCadeau, message) {
 
-    // Aucun message : aucune insertion
-    if (!message) {
-        return;
-    }
-
-    const { data, error } = await supabase
-        .from("souhait")
-        .insert([
-            {
-                id_invite: idInvite,
-                message: message
-            }
-        ])
-        .select()
-        .single();
-
-    if (error) {
-        throw error;
-    }
-
-    console.log("SOUHAIT ENREGISTRE :", data);
-
-}
-
-// ==========================================
-// 12. ANNULER LES INSERTIONS EN CAS D'ERREUR
-// ==========================================
-
-async function annulerInscription(idInvite, reservationCreee) {
-
-    // Supprimer d'abord la réservation
-    if (reservationCreee) {
-
-        const { error } = await supabase
-            .from("reservation")
-            .delete()
-            .eq("id_invite", idInvite);
-
-        if (error) {
-            console.error("Erreur suppression réservation :", error);
-        }
-
-    }
-
-    // Supprimer ensuite l'invité
-    const { error } = await supabase
-        .from("invite")
-        .delete()
-        .eq("id_invite", idInvite);
-
-    if (error) {
-        console.error("Erreur suppression invité :", error);
-    }
-
-}
-
-// ==========================================
-// 13. AFFICHER LA CONFIRMATION
-// ==========================================
-
-function afficherConfirmation() {
-
-    messageConfirmation.textContent = cadeauChoisi.nom;
-
-    sectionInscription.hidden = true;
-    sectionCadeaux.hidden = true;
-    confirmation.hidden = false;
-
-    confirmation.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
+    const { data, error } = await supabase.rpc("reserver_cadeau", {
+        p_nom: nom,
+        p_prenom: prenom,
+        p_telephone: telephone,
+        p_id_cadeau: idCadeau,
+        p_message: message || null
     });
 
+    if (error) {
+        throw error;
+    }
+
+    return data;
 }
 
+
 // ==========================================
-// 14. GERER LA VALIDATION DU FORMULAIRE
+// 13. SOUMISSION DU FORMULAIRE INVITE
 // ==========================================
 
 formInvite.addEventListener("submit", async function (event) {
 
     event.preventDefault();
 
-    // Vérifier qu'un cadeau a été sélectionné
-    if (!cadeauChoisi) {
-
-        alert("Veuillez d'abord choisir un cadeau.");
-
-        return;
-    }
-
-    // Récupération des informations
     const nom = champNom.value.trim();
     const prenom = champPrenom.value.trim();
+
+    const telephone = champTelephone.value
+        .trim()
+        .replace(/[^\d+]/g, "");
+
     const message = champMessage.value.trim();
 
-    // Vérification des champs
-    if (!nom || !prenom) {
-
-        alert("Veuillez renseigner votre nom et votre prénom.");
-
+    if (!cadeauChoisi) {
+        alert("Veuillez d'abord choisir un cadeau.");
         return;
     }
 
     if (!acceptConditions.checked) {
-
-        alert("Vous devez accepter les conditions d'utilisation.");
-
+        alert("Veuillez accepter les conditions d'utilisation.");
         return;
     }
 
-    // Désactiver le bouton pendant l'enregistrement
-    const boutonValidation = formInvite.querySelector(
-        'button[type="submit"]'
-    );
+    const bouton = formInvite.querySelector('button[type="submit"]');
 
-    boutonValidation.disabled = true;
-    boutonValidation.textContent = "Enregistrement en cours...";
-
-    let idInvite = null;
-    let reservationCreee = false;
+    bouton.disabled = true;
+    bouton.textContent = "Enregistrement en cours...";
 
     try {
 
-        // 1. Enregistrer l'invité
-        idInvite = await enregistrerInvite(nom, prenom);
-
-        // 2. Enregistrer sa réservation
-        await enregistrerReservation(
-            idInvite,
-            cadeauChoisi.id_cadeau
+        const resultat = await reserverCadeau(
+            nom,
+            prenom,
+            telephone,
+            cadeauChoisi.id_cadeau,
+            message
         );
 
-        reservationCreee = true;
+        alert(
+            "Votre inscription a été enregistrée avec succès !\n" +
+            "Cadeau : " + resultat[0].nom_cadeau
+        );
 
-        // 3. Enregistrer son souhait si renseigné
-        await enregistrerSouhait(idInvite, message);
+        formInvite.reset();
 
-        console.log("INSCRIPTION TERMINEE AVEC SUCCES !");
+        cadeauChoisi = null;
 
-        // 4. Afficher la confirmation
-        afficherConfirmation();
+        sectionInscription.hidden = true;
 
-        // 5. Actualiser les réservations en mémoire
-        reservations.push({
-            id_cadeau: cadeauChoisi.id_cadeau
-        });
+        await chargerCadeaux();
 
     } catch (error) {
 
-        console.error("ERREUR INSCRIPTION :", error);
-
-        // Annuler les insertions déjà effectuées
-        if (idInvite !== null) {
-
-            await annulerInscription(
-                idInvite,
-                reservationCreee
-            );
-
-        }
+        console.error("ERREUR ENREGISTREMENT :", error);
 
         alert(
-            "Une erreur est survenue lors de votre inscription. " +
-            "Veuillez réessayer. Si le problème persiste, contactez les futurs parents."
+            "Impossible d'enregistrer votre inscription :\n" +
+            error.message
         );
 
     } finally {
 
-        // Réactiver le bouton
-        boutonValidation.disabled = false;
-        boutonValidation.textContent = "Confirmer ma réservation";
+        bouton.disabled = false;
+        bouton.textContent = "Confirmer mon inscription";
 
     }
 
