@@ -83,26 +83,72 @@
 
             <form id="formInvite">
 
+                
                 <div class="form-group">
                     <label for="nom">Nom</label>
-                    <input type="text" id="nom" required>
+
+                    <input
+                        type="text"
+                        id="nom"
+                        name="nom"
+                        required
+                        maxlength="50"
+                        autocomplete="family-name"
+                        placeholder="Votre nom"
+                    >
+
+                    <small class="error-message" id="erreurNom"></small>
                 </div>
 
                 <div class="form-group">
                     <label for="prenom">Prénom</label>
-                    <input type="text" id="prenom" required>
-                </div>
 
+                    <input
+                        type="text"
+                        id="prenom"
+                        name="prenom"
+                        required
+                        maxlength="50"
+                        autocomplete="given-name"
+                        placeholder="Votre prénom"
+                    >
+
+                    <small class="error-message" id="erreurPrenom"></small>
+                </div>
 
                 <div class="form-group">
                     <label for="telephone">Numéro de téléphone</label>
-                    <input type="tel" id="telephone" name="telephone" placeholder="Ex : +24107********" required>
+
+                    <input
+                        type="tel"
+                        id="telephone"
+                        name="telephone"
+                        required
+                        maxlength="17"
+                        autocomplete="tel"
+                        inputmode="tel"
+                        placeholder="+241 77 23 45 67"
+                    >
+
+                    <small class="error-message" id="erreurTelephone"></small>
                 </div>
 
                 <div class="form-group">
-                    <label for="message">Votre souhait pour les parents (facultatif)</label>
-                    <textarea id="message" rows="4"></textarea>
+                    <label for="message">
+                        Votre souhait pour les parents (facultatif)
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="4"
+                        maxlength="300"
+                        placeholder="Écrivez votre petit message..."
+                    ></textarea>
+
+                    <small class="error-message" id="erreurMessage"></small>
                 </div>
+
 
                 <div class="conditions">
 
@@ -122,11 +168,55 @@
 
                 </div>
 
-                <button type="submit">
-                    Confirmer ma réservation
+                
+            <!-- Bouton pour vérifier les informations -->
+            <button type="button" id="boutonVerifier">
+                Vérifier mes informations
+            </button>
+
+            <!-- Récapitulatif : caché au départ -->
+            <div id="sectionRecapitulatif" hidden>
+
+                <h3>Vérifiez votre inscription</h3>
+                <p>Veuillez relire vos informations avant de confirmer.</p>
+
+                <div class="recap-ligne">
+                    <strong>Nom :</strong>
+                    <span id="recapNom"></span>
+                </div>
+
+                <div class="recap-ligne">
+                    <strong>Prénom :</strong>
+                    <span id="recapPrenom"></span>
+                </div>
+
+                <div class="recap-ligne">
+                    <strong>Téléphone :</strong>
+                    <span id="recapTelephone"></span>
+                </div>
+
+                <div class="recap-ligne">
+                    <strong>Cadeau choisi :</strong>
+                    <span id="recapCadeau"></span>
+                </div>
+
+                <div class="recap-ligne">
+                    <strong>Votre souhait :</strong>
+                    <p id="recapMessage"></p>
+                </div>
+
+                <button type="button" id="boutonModifier">
+                    Modifier mes informations
                 </button>
 
-            </form>
+                <button type="submit" id="boutonConfirmer">
+                    Confirmer mon inscription
+                </button>
+
+            </div>
+
+
+        </form>
         
         <!-- CONFIRMATION -->
         <section id="confirmation" class="confirmation-section" hidden>
