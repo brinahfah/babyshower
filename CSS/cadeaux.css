@@ -707,3 +707,69 @@ button:disabled {
 .cadeau-card:hover .cadeau-sticker {
     transform: rotate(5deg) scale(1.1);
 }
+
+
+/* ==========================================
+   IMAGES PNG DES CADEAUX
+========================================== */
+
+.cadeau-sticker {
+    width: 100px;
+    height: 100px;
+
+    min-width: 100px;
+    min-height: 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 15px;
+
+    background: linear-gradient(
+        145deg,
+        #fffaf2,
+        #f1e4d4
+    );
+
+    border: 2px solid #ead8c5;
+    border-radius: 50%;
+
+    font-size: 2.8rem;
+
+    box-shadow:
+        0 5px 12px rgba(130, 100, 75, 0.12);
+
+    transform: rotate(-5deg);
+
+    transition: transform 0.3s ease;
+
+    overflow: hidden;
+}
+
+/* Images PNG */
+
+.cadeau-image {
+    width: 78%;
+    height: 78%;
+
+    object-fit: contain;
+
+    display: block;
+
+    filter: drop-shadow(
+        0 3px 4px rgba(100, 70, 40, 0.12)
+    );
+
+    transition: transform 0.3s ease;
+}
+
+/* Animation au survol */
+
+.cadeau-card:hover .cadeau-sticker {
+    transform: rotate(5deg) scale(1.08);
+}
+
+.cadeau-card:hover .cadeau-image {
+    transform: scale(1.08);
+}

@@ -135,84 +135,90 @@ function compterReservations(idCadeau) {
 // STICKERS REPRESENTATIFS DES CADEAUX
 // ==========================================
 
-function obtenirSticker(nom) {
-    const cadeau = nom.toLowerCase();
 
-    if (cadeau.includes("siège auto")) {
-        return "";
+function obtenirVisuel(cadeau) {
+    const nom = cadeau.toLowerCase();
+
+    // Cadeaux qui conservent leurs emojis
+    if (
+        nom.includes("biberon") ||
+        nom.includes("tétine") ||
+        nom.includes("chauffe-biberon")
+    ) {
+        return { type: "emoji", valeur: "🍼" };
     }
 
-    if (cadeau.includes("sac de maternité")) {
-        return "";
+    if (
+        nom.includes("toilette") ||
+        nom.includes("biolane") ||
+        nom.includes("mustela")
+    ) {
+        return { type: "emoji", valeur: "🧴" };
     }
 
-    if (cadeau.includes("bavoir") ||
-        cadeau.includes("bonnet") ||
-        cadeau.includes("chaussette")) {
-        return "";
+    if (nom.includes("cadeau au choix")) {
+        return { type: "emoji", valeur: "🎁" };
     }
 
-    if (cadeau.includes("biberon") ||
-        cadeau.includes("tétine") ||
-        cadeau.includes("chauffe-biberon")) {
-        return "🍼";
+    if (
+        nom.includes("peluche") ||
+        nom.includes("coussin")
+    ) {
+        return { type: "emoji", valeur: "🧸" };
     }
 
-    if (cadeau.includes("drap") ||
-        cadeau.includes("serviette") ||
-        cadeau.includes("couverture")) {
-        return "🛏️";
+    if (nom.includes("enveloppe")) {
+        return { type: "emoji", valeur: "💌" };
     }
 
-    if (cadeau.includes("poussette")) {
-        return "";
+    // Images PNG pour les autres cadeaux
+    let image = "cadeaux/default.png";
+
+    if (nom.includes("siège auto")) {
+        image = "images/siege_auto.jpeg";
+    } 
+    else if (nom.includes("sac de maternité")) {
+        image = "images/sac_maternite.jpeg";
+    }
+    else if (
+        nom.includes("bavoir") ||
+        nom.includes("bonnet") ||
+        nom.includes("chaussette")
+    ) {
+        image = "images/Baby shoes clipart.jpeg";
+    }
+    else if (
+        nom.includes("drap") ||
+        nom.includes("serviette") ||
+        nom.includes("couverture")
+    ) {
+        image = "images/draps.jpeg";
+    }
+    else if (nom.includes("poussette")) {
+        image = "images/poussette.jpeg";
+    }
+    else if (nom.includes("vêtement")) {
+        image = "images/vetement.jpeg";
+    }
+    else if (nom.includes("lait")) {
+        image = "images/lait.jpeg";
+    }
+    else if (nom.includes("lingette")) {
+        image = "images/lingette.jpeg";
+    }
+    else if (nom.includes("couche")) {
+        image = "images/couche.jpeg";
+    }
+    else if (nom.includes("tapis de veille")) {
+        image = "images/tapis_veille.jpeg";
+    }
+    else if (nom.includes("jouet")) {
+        image = "images/jouet.jpeg";
     }
 
-    if (cadeau.includes("toilette") ||
-        cadeau.includes("biolane") ||
-        cadeau.includes("mustela")) {
-        return "🧴";
-    }
-
-    if (cadeau.includes("vêtement")) {
-        return "";
-    }
-
-    if (cadeau.includes("lait")) {
-        return "🥛";
-    }
-
-    if (cadeau.includes("cadeau au choix")) {
-        return "🎁";
-    }
-
-    if (cadeau.includes("lingette")) {
-        return "";
-    }
-
-    if (cadeau.includes("peluche") ||
-        cadeau.includes("coussin")) {
-        return "🧸";
-    }
-
-    if (cadeau.includes("couche")) {
-        return "";
-    }
-
-    if (cadeau.includes("tapis de veille")) {
-        return "";
-    }
-
-    if (cadeau.includes("jouet")) {
-        return "";
-    }
-
-    if (cadeau.includes("enveloppe")) {
-        return "💌";
-    }
-
-    return "🎀";
+    return { type: "image", valeur: image };
 }
+
 
 // ==========================================
 // 7. AFFICHER LES CADEAUX
@@ -252,14 +258,38 @@ function afficherCadeaux() {
             carte.classList.add("indisponible");
         }
 
-        // Sticker du cadeau
+        
+        // Visuel du cadeau
         const sticker = document.createElement("div");
 
         sticker.classList.add("cadeau-sticker");
 
-        sticker.textContent = obtenirSticker(cadeau.nom);
+        const visuel = obtenirVisuel(cadeau.nom);
+
+        if (visuel.type === "emoji") {
+
+            sticker.textContent = visuel.valeur;
+
+        } else {
+
+            const image = document.createElement("img");
+
+            image.src = visuel.valeur;
+            image.alt = cadeau.nom;
+
+            image.classList.add("cadeau-image");
+
+            // Image de secours si le PNG est introuvable
+            image.onerror = function () {
+                this.src = "cadeaux/default.png";
+            };
+
+            sticker.appendChild(image);
+
+        }
 
         sticker.setAttribute("aria-hidden", "true");
+
 
 
         // Nom du cadeau
