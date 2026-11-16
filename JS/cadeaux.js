@@ -109,53 +109,46 @@ champPrenom.addEventListener("input", function () {
 // Autoriser uniquement les chiffres, le + initial
 // et les espaces dans le téléphone.
 
+
 champTelephone.addEventListener("input", function () {
 
-   // Vérifier si l'utilisateur a commencé par le signe +
-    const commenceParPlus = this.value.trimStart().startsWith("+");
+    let valeur = this.value;
 
-    // Récupérer uniquement les chiffres
-    // Maximum : 11 chiffres (3 pour 241 + 8 pour le numéro)
-    const chiffres = this.value
-        .replace(/\D/g, "")
-        .slice(0, 11);
+    // Autoriser uniquement les chiffres, les espaces et +
+    valeur = valeur.replace(/[^\d+ ]/g, "");
 
-    // Conserver le + au début si l'utilisateur l'a saisi
-    if (commenceParPlus) {
-        this.value = "+" + chiffres;
-    } else {
-        this.value = chiffres;
+    // Vérifier si le numéro commence par +
+    const aUnIndicatif = valeur.startsWith("+");
+
+    // Retirer les signes + supplémentaires
+    valeur = valeur.replace(/\+/g, "");
+
+    // Récupérer les chiffres (maximum 11)
+    const chiffres = valeur.replace(/\D/g, "").slice(0, 11);
+
+    // Reconstruire le numéro avec les espaces
+    let resultat = "";
+
+    if (aUnIndicatif) {
+        resultat = "+";
     }
 
+    for (let i = 0; i < chiffres.length; i++) {
 
-    // Maximum : +241 suivi de 8 chiffres.
+        // Ajouter un espace après l'indicatif et après les groupes de 2 chiffres
+        if (aUnIndicatif && i === 3) {
+            resultat += " ";
+        } else if (aUnIndicatif && i > 3 && (i - 3) % 2 === 0) {
+            resultat += " ";
+        }
 
-    const commenceAvecIndicatif = valeur.startsWith("+241");
-
-    if (commenceAvecIndicatif) {
-
-        const indicatif = "+241";
-
-        const chiffres = valeur
-            .substring(4)
-            .replace(/\D/g, "")
-            .slice(0, 8);
-
-        valeur = indicatif + chiffres;
-
-    } else {
-
-        const chiffres = valeur
-            .replace(/\D/g, "")
-            .slice(0, 11);
-
-        valeur = chiffres;
-
+        resultat += chiffres[i];
     }
 
-    this.value = valeur;
+    this.value = resultat;
 
 });
+
 
 // ==========================================
 // 6. FONCTIONS DE VALIDATION
