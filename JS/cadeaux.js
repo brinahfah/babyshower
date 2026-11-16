@@ -22,6 +22,7 @@ const formInvite = document.getElementById("formInvite");
 const champNom = document.getElementById("nom");
 const champPrenom = document.getElementById("prenom");
 const champTelephone = document.getElementById("telephone");
+
 const champMessage = document.getElementById("message");
 
 const acceptConditions = document.getElementById("acceptConditions");
@@ -110,15 +111,22 @@ champPrenom.addEventListener("input", function () {
 
 champTelephone.addEventListener("input", function () {
 
-    let valeur = this.value.replace(/[^\d+ ]/g, "");
+   // Vérifier si l'utilisateur a commencé par le signe +
+    const commenceParPlus = this.value.trimStart().startsWith("+");
 
-    // Le signe + doit être uniquement au début.
+    // Récupérer uniquement les chiffres
+    // Maximum : 11 chiffres (3 pour 241 + 8 pour le numéro)
+    const chiffres = this.value
+        .replace(/\D/g, "")
+        .slice(0, 11);
 
-    valeur = valeur.replace(/\+/g, "");
-
-    if (this.value.trim().startsWith("+")) {
-        valeur = "+" + valeur;
+    // Conserver le + au début si l'utilisateur l'a saisi
+    if (commenceParPlus) {
+        this.value = "+" + chiffres;
+    } else {
+        this.value = chiffres;
     }
+
 
     // Maximum : +241 suivi de 8 chiffres.
 
@@ -771,6 +779,7 @@ function verifierInformations() {
     const prenom = champPrenom.value.trim();
 
     const telephone = champTelephone.value.trim();
+    
 
     const message = champMessage.value.trim();
 
