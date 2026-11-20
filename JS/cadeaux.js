@@ -22,7 +22,6 @@ const formInvite = document.getElementById("formInvite");
 const champNom = document.getElementById("nom");
 const champPrenom = document.getElementById("prenom");
 const champTelephone = document.getElementById("telephone");
-
 const champMessage = document.getElementById("message");
 
 const acceptConditions = document.getElementById("acceptConditions");
@@ -44,53 +43,87 @@ const recapMessage = document.getElementById("recapMessage");
 
 let cadeaux = [];
 let reservations = [];
-let cadeauChoisi = null;
+
+// Plusieurs cadeaux peuvent être sélectionnés.
+let cadeauxChoisis = [];
 
 let abonnementReservations = null;
-
 let recapitulatifValide = false;
-
-const LIMITE_RESERVATION = 5;
 
 // ==========================================
 // 3. NORMALISER LES NOMS
 // ==========================================
 
 function normaliserNom(nom) {
+
     return nom
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
+
 }
 
 // ==========================================
-// 4. REGEX DE VALIDATION
+// 4. DETERMINER LES CADEAUX ILLIMITES
 // ==========================================
 
-// Lettres uniquement : accents autorisés.
-// Espaces, apostrophes et traits d'union autorisés.
-// Les chiffres sont interdits.
+function estIllimite(nom) {
+
+    const nomNormalise = normaliserNom(nom);
+
+    return (
+        nomNormalise.includes("enveloppe") ||
+        nomNormalise.includes("couche") ||
+        nomNormalise.includes("lingette") ||
+        nomNormalise.includes("vetement")
+    );
+
+}
+
+// ==========================================
+// 5. DETERMINER LA LIMITE DE RESERVATION
+// ==========================================
+
+function obtenirLimite(cadeau) {
+
+    const nom = normaliserNom(cadeau.nom);
+
+    // Cadeaux illimités.
+    if (estIllimite(cadeau.nom)) {
+        return Infinity;
+    }
+
+    // Cadeaux limités à une seule réservation.
+    if (
+        nom.includes("poussette") ||
+        nom.includes("siege auto") ||
+        nom.includes("sac de maternite") ||
+        (nom.includes("tapis") && nom.includes("eveil"))
+    ) {
+        return 1;
+    }
+
+    // Tous les autres cadeaux sont limités à 5.
+    return 5;
+
+}
+
+// ==========================================
+// 6. REGEX DE VALIDATION
+// ==========================================
 
 const REGEX_NOM =
     /^[\p{L}\p{M}]+(?:[ '\u2019-][\p{L}\p{M}]+)*$/u;
 
-// Téléphone gabonais : +241 suivi de 8 chiffres.
-// Les préfixes mobiles 6 et 7 sont acceptés.
-
 const REGEX_TELEPHONE =
     /^\+241[67]\d{7}$/;
-
-// Message de souhait : lettres, chiffres, ponctuation,
-// espaces et emojis autorisés.
 
 const REGEX_SOUHAIT =
     /^[\p{L}\p{M}\p{N}\p{Zs}\p{P}\p{S}\u200D\uFE0F]*$/u;
 
 // ==========================================
-// 5. SECURISER LES CHAMPS DE SAISIE
+// 7. SECURISER LES CHAMPS DE SAISIE
 // ==========================================
-
-// Empêcher les chiffres dans le nom.
 
 champNom.addEventListener("input", function () {
 
@@ -98,35 +131,24 @@ champNom.addEventListener("input", function () {
 
 });
 
-// Empêcher les chiffres dans le prénom.
-
 champPrenom.addEventListener("input", function () {
 
     this.value = this.value.replace(/[^\p{L}\p{M} '\u2019-]/gu, "");
 
 });
 
-// Autoriser uniquement les chiffres, le + initial
-// et les espaces dans le téléphone.
-
-
 champTelephone.addEventListener("input", function () {
 
     let valeur = this.value;
 
-    // Autoriser uniquement les chiffres, les espaces et +
     valeur = valeur.replace(/[^\d+ ]/g, "");
 
-    // Vérifier si le numéro commence par +
     const aUnIndicatif = valeur.startsWith("+");
 
-    // Retirer les signes + supplémentaires
     valeur = valeur.replace(/\+/g, "");
 
-    // Récupérer les chiffres (maximum 11)
     const chiffres = valeur.replace(/\D/g, "").slice(0, 11);
 
-    // Reconstruire le numéro avec les espaces
     let resultat = "";
 
     if (aUnIndicatif) {
@@ -135,23 +157,26 @@ champTelephone.addEventListener("input", function () {
 
     for (let i = 0; i < chiffres.length; i++) {
 
-        // Ajouter un espace après l'indicatif et après les groupes de 2 chiffres
         if (aUnIndicatif && i === 3) {
+
             resultat += " ";
+
         } else if (aUnIndicatif && i > 3 && (i - 3) % 2 === 0) {
+
             resultat += " ";
+
         }
 
         resultat += chiffres[i];
+
     }
 
     this.value = resultat;
 
 });
 
-
 // ==========================================
-// 6. FONCTIONS DE VALIDATION
+// 8. FONCTIONS DE VALIDATION
 // ==========================================
 
 function validerNomPrenom(valeur) {
@@ -180,9 +205,6 @@ function validerSouhait(valeur) {
         return false;
     }
 
-    // Refuser les caractères pouvant construire
-    // des balises ou des chemins.
-
     if (/[<>/\\]/.test(message)) {
         return false;
     }
@@ -192,7 +214,7 @@ function validerSouhait(valeur) {
 }
 
 // ==========================================
-// 7. INVALIDER LE RECAPITULATIF SI MODIFICATION
+// 9. INVALIDER LE RECAPITULATIF SI MODIFICATION
 // ==========================================
 
 [
@@ -225,23 +247,7 @@ acceptConditions.addEventListener("change", function () {
 });
 
 // ==========================================
-// 8. DETERMINER LES CADEAUX ILLIMITES
-// ==========================================
-
-function estIllimite(nom) {
-
-    const nomNormalise = normaliserNom(nom);
-
-    return (
-        nomNormalise.includes("enveloppe") ||
-        nomNormalise.includes("couche") ||
-        nomNormalise.includes("lingette")
-    );
-
-}
-
-// ==========================================
-// 9. OUVRIR LA LISTE DES CADEAUX
+// 10. OUVRIR LA LISTE DES CADEAUX
 // ==========================================
 
 btnCommencer.addEventListener("click", async function () {
@@ -255,7 +261,7 @@ btnCommencer.addEventListener("click", async function () {
 });
 
 // ==========================================
-// 10. RECUPERER LES DONNEES DE SUPABASE
+// 11. RECUPERER LES DONNEES DE SUPABASE
 // ==========================================
 
 async function chargerCadeaux() {
@@ -263,8 +269,6 @@ async function chargerCadeaux() {
     try {
 
         listeCadeaux.textContent = "Chargement des cadeaux...";
-
-        // Récupérer les cadeaux.
 
         const {
             data: donneesCadeaux,
@@ -279,8 +283,6 @@ async function chargerCadeaux() {
         }
 
         cadeaux = donneesCadeaux || [];
-
-        // Récupérer les réservations.
 
         const {
             data: donneesReservations,
@@ -309,7 +311,7 @@ async function chargerCadeaux() {
 }
 
 // ==========================================
-// 11. ACTUALISATION AUTOMATIQUE
+// 12. ACTUALISATION AUTOMATIQUE
 // ==========================================
 
 function ecouterReservations() {
@@ -344,7 +346,7 @@ function ecouterReservations() {
 }
 
 // ==========================================
-// 12. COMPTER LES RESERVATIONS
+// 13. COMPTER LES RESERVATIONS
 // ==========================================
 
 function compterReservations(idCadeau) {
@@ -357,20 +359,23 @@ function compterReservations(idCadeau) {
 }
 
 // ==========================================
-// 13. CALCULER LES PLACES RESTANTES
+// 14. CALCULER LES PLACES RESTANTES
 // ==========================================
 
 function calculerPlacesRestantes(cadeau) {
 
-    const nombreReservations =
-        compterReservations(cadeau.id_cadeau);
+    const limite = obtenirLimite(cadeau);
 
-    return LIMITE_RESERVATION - nombreReservations;
+    if (limite === Infinity) {
+        return Infinity;
+    }
+
+    return limite - compterReservations(cadeau.id_cadeau);
 
 }
 
 // ==========================================
-// 14. VERIFIER SI UN CADEAU EST COMPLET
+// 15. VERIFIER SI UN CADEAU EST COMPLET
 // ==========================================
 
 function estIndisponible(cadeau) {
@@ -384,14 +389,12 @@ function estIndisponible(cadeau) {
 }
 
 // ==========================================
-// 15. VISUELS DES CADEAUX
+// 16. VISUELS DES CADEAUX
 // ==========================================
 
 function obtenirVisuel(nomCadeau) {
 
     const nom = normaliserNom(nomCadeau);
-
-    // Emojis.
 
     if (
         nom.includes("biberon") ||
@@ -407,7 +410,13 @@ function obtenirVisuel(nomCadeau) {
     if (
         nom.includes("toilette") ||
         nom.includes("biolane") ||
-        nom.includes("mustela")
+        nom.includes("mustela") ||
+        nom.includes("lait de corps") ||
+        nom.includes("gel nettoyant") ||
+        nom.includes("eau de toilette") ||
+        nom.includes("huile de massage") ||
+        nom.includes("creme de change") ||
+        nom.includes("poudre")
     ) {
         return {
             type: "emoji",
@@ -438,8 +447,6 @@ function obtenirVisuel(nomCadeau) {
             valeur: "💌"
         };
     }
-
-    // Images PNG/JPEG.
 
     let image = "cadeaux/default.png";
 
@@ -487,7 +494,7 @@ function obtenirVisuel(nomCadeau) {
         image = "images/couche.jpeg";
     }
 
-    else if (nom.includes("tapis de veille")) {
+    else if (nom.includes("tapis")) {
         image = "images/tapis_veille.jpeg";
     }
 
@@ -503,7 +510,94 @@ function obtenirVisuel(nomCadeau) {
 }
 
 // ==========================================
-// 16. AFFICHER LES CADEAUX
+// 17. METTRE A JOUR LES CADEAUX SELECTIONNES
+// ==========================================
+
+function mettreAJourSelection() {
+
+    if (cadeauxChoisis.length === 0) {
+
+        cadeauSelectionne.textContent =
+            "Aucun cadeau sélectionné.";
+
+        sectionInscription.hidden = true;
+
+        recapitulatifValide = false;
+
+        sectionRecapitulatif.hidden = true;
+
+        return;
+
+    }
+
+    const noms = cadeauxChoisis.map(cadeau => cadeau.nom);
+
+    cadeauSelectionne.textContent =
+        "Vos cadeaux sélectionnés : " + noms.join(", ");
+
+    sectionInscription.hidden = false;
+
+    recapitulatifValide = false;
+
+    sectionRecapitulatif.hidden = true;
+
+    boutonVerifier.hidden = false;
+
+}
+
+// ==========================================
+// 18. SELECTIONNER OU RETIRER UN CADEAU
+// ==========================================
+
+function selectionnerCadeau(cadeau) {
+
+    const index = cadeauxChoisis.findIndex(
+        element =>
+            String(element.id_cadeau) === String(cadeau.id_cadeau)
+    );
+
+    // Si le cadeau est déjà sélectionné, on le retire.
+
+    if (index !== -1) {
+
+        cadeauxChoisis.splice(index, 1);
+
+        mettreAJourSelection();
+
+        afficherCadeaux();
+
+        return;
+
+    }
+
+    // Vérifier la disponibilité.
+
+    if (estIndisponible(cadeau)) {
+
+        alert(
+            "Ce cadeau n'est malheureusement plus disponible."
+        );
+
+        chargerCadeaux();
+
+        return;
+
+    }
+
+    // Ajouter le cadeau à la sélection.
+
+    cadeauxChoisis.push(cadeau);
+
+    mettreAJourSelection();
+
+    afficherCadeaux();
+
+    console.log("Cadeaux sélectionnés :", cadeauxChoisis);
+
+}
+
+// ==========================================
+// 19. AFFICHER LES CADEAUX
 // ==========================================
 
 function afficherCadeaux() {
@@ -524,13 +618,21 @@ function afficherCadeaux() {
         const nombreReservations =
             compterReservations(cadeau.id_cadeau);
 
-        const illimite = estIllimite(cadeau.nom);
+        const limite = obtenirLimite(cadeau);
 
-        const placesRestantes =
-            LIMITE_RESERVATION - nombreReservations;
+        const illimite = limite === Infinity;
+
+        const placesRestantes = illimite
+            ? Infinity
+            : limite - nombreReservations;
 
         const indisponible =
             !illimite && placesRestantes <= 0;
+
+        const estSelectionne = cadeauxChoisis.some(
+            element =>
+                String(element.id_cadeau) === String(cadeau.id_cadeau)
+        );
 
         // Carte.
 
@@ -540,6 +642,10 @@ function afficherCadeaux() {
 
         if (indisponible) {
             carte.classList.add("indisponible");
+        }
+
+        if (estSelectionne) {
+            carte.classList.add("selectionne");
         }
 
         // Sticker.
@@ -594,18 +700,15 @@ function afficherCadeaux() {
 
             disponibilite.textContent = "Disponible sans limite";
 
-        }
-
-        else if (indisponible) {
-
-            disponibilite.textContent = "0 place restante sur 5";
-
-        }
-
-        else {
+        } else if (indisponible) {
 
             disponibilite.textContent =
-                `${placesRestantes} place(s) restante(s) sur 5`;
+                `0 place restante sur ${limite}`;
+
+        } else {
+
+            disponibilite.textContent =
+                `${placesRestantes} place(s) restante(s) sur ${limite}`;
 
         }
 
@@ -615,7 +718,7 @@ function afficherCadeaux() {
 
         bouton.type = "button";
 
-        if (indisponible) {
+        if (indisponible && !estSelectionne) {
 
             bouton.textContent = "Cadeau complet";
 
@@ -630,21 +733,20 @@ function afficherCadeaux() {
 
             });
 
-        }
+        } else {
 
-        else {
-
-            bouton.textContent = "Choisir ce cadeau";
+            bouton.textContent = estSelectionne
+                ? "Retirer ce cadeau"
+                : "Choisir ce cadeau";
 
             bouton.addEventListener("click", function () {
 
-                if (estIndisponible(cadeau)) {
+                if (!estSelectionne && estIndisponible(cadeau)) {
 
                     chargerCadeaux();
 
                     alert(
-                        "Ce cadeau n'est plus disponible.\n\n" +
-                        "Sa limite de réservation vient d'être atteinte. " +
+                        "Ce cadeau n'est plus disponible. " +
                         "Merci de choisir un autre cadeau."
                     );
 
@@ -670,41 +772,7 @@ function afficherCadeaux() {
 }
 
 // ==========================================
-// 17. SELECTIONNER UN CADEAU
-// ==========================================
-
-function selectionnerCadeau(cadeau) {
-
-    if (estIndisponible(cadeau)) {
-
-        alert(
-            "Ce cadeau n'est plus disponible. Merci d'en choisir un autre."
-        );
-
-        chargerCadeaux();
-
-        return;
-
-    }
-
-    cadeauChoisi = cadeau;
-
-    cadeauSelectionne.textContent =
-        "Vous avez choisi : " + cadeau.nom;
-
-    sectionInscription.hidden = false;
-
-    sectionInscription.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-
-    console.log("Cadeau sélectionné :", cadeau);
-
-}
-
-// ==========================================
-// 18. VERIFICATION DE LA SESSION SUPABASE
+// 20. VERIFICATION DE LA SESSION SUPABASE
 // ==========================================
 
 const {
@@ -727,18 +795,16 @@ if (sessionData.session) {
 }
 
 // ==========================================
-// 19. FONCTION RESERVER CADEAU
+// 21. FONCTION RESERVER PLUSIEURS CADEAUX
 // ==========================================
 
 async function reserverCadeau(
     nom,
     prenom,
     telephone,
-    idCadeau,
+    idsCadeaux,
     message
 ) {
-
-    // CORRECTION : normalisation du téléphone.
 
     const telephoneNormalise = telephone.replace(/\s/g, "");
 
@@ -748,7 +814,7 @@ async function reserverCadeau(
             p_nom: nom,
             p_prenom: prenom,
             p_telephone: telephoneNormalise,
-            p_id_cadeau: idCadeau,
+            p_ids_cadeaux: idsCadeaux,
             p_message: message || null
         }
     );
@@ -762,28 +828,22 @@ async function reserverCadeau(
 }
 
 // ==========================================
-// 20. AFFICHER LE RECAPITULATIF
+// 22. VERIFIER LES INFORMATIONS
 // ==========================================
 
 function verifierInformations() {
 
     const nom = champNom.value.trim();
-
     const prenom = champPrenom.value.trim();
-
     const telephone = champTelephone.value.trim();
-    
-
     const message = champMessage.value.trim();
-
-    // Réinitialiser les erreurs.
 
     document.getElementById("erreurNom").textContent = "";
     document.getElementById("erreurPrenom").textContent = "";
     document.getElementById("erreurTelephone").textContent = "";
     document.getElementById("erreurMessage").textContent = "";
 
-    // Vérifier le nom.
+    // Nom.
 
     if (!validerNomPrenom(nom)) {
 
@@ -796,7 +856,7 @@ function verifierInformations() {
 
     }
 
-    // Vérifier le prénom.
+    // Prénom.
 
     if (!validerNomPrenom(prenom)) {
 
@@ -809,7 +869,7 @@ function verifierInformations() {
 
     }
 
-    // Vérifier le téléphone.
+    // Téléphone.
 
     if (!validerTelephone(telephone)) {
 
@@ -822,7 +882,7 @@ function verifierInformations() {
 
     }
 
-    // Vérifier le souhait.
+    // Message.
 
     if (!validerSouhait(message)) {
 
@@ -835,17 +895,17 @@ function verifierInformations() {
 
     }
 
-    // Vérifier le cadeau.
+    // Vérifier la sélection multiple.
 
-    if (!cadeauChoisi) {
+    if (cadeauxChoisis.length === 0) {
 
-        alert("Veuillez choisir un cadeau avant de continuer.");
+        alert("Veuillez choisir au moins un cadeau.");
 
         return false;
 
     }
 
-    // Vérifier les conditions.
+    // Conditions.
 
     if (!acceptConditions.checked) {
 
@@ -857,11 +917,18 @@ function verifierInformations() {
 
     }
 
-    // Vérifier une dernière fois la disponibilité.
+    // Vérifier la disponibilité de tous les cadeaux.
 
-    if (estIndisponible(cadeauChoisi)) {
+    const cadeauxIndisponibles = cadeauxChoisis.filter(
+        cadeau => estIndisponible(cadeau)
+    );
 
-        alert("Ce cadeau n'est malheureusement plus disponible.");
+    if (cadeauxIndisponibles.length > 0) {
+
+        alert(
+            "Certains cadeaux que vous avez sélectionnés ne sont plus disponibles.\n\n" +
+            cadeauxIndisponibles.map(cadeau => cadeau.nom).join(", ")
+        );
 
         chargerCadeaux();
 
@@ -877,7 +944,9 @@ function verifierInformations() {
 
     recapTelephone.textContent = telephone;
 
-    recapCadeau.textContent = cadeauChoisi.nom;
+    recapCadeau.textContent = cadeauxChoisis
+        .map(cadeau => cadeau.nom)
+        .join(", ");
 
     recapMessage.textContent =
         message || "Aucun souhait renseigné.";
@@ -900,7 +969,7 @@ function verifierInformations() {
 }
 
 // ==========================================
-// 21. EVENEMENT DU BOUTON VERIFIER
+// 23. EVENEMENT DU BOUTON VERIFIER
 // ==========================================
 
 boutonVerifier.addEventListener("click", function () {
@@ -910,7 +979,7 @@ boutonVerifier.addEventListener("click", function () {
 });
 
 // ==========================================
-// 22. RETOUR AU FORMULAIRE
+// 24. RETOUR AU FORMULAIRE
 // ==========================================
 
 boutonModifier.addEventListener("click", function () {
@@ -926,14 +995,12 @@ boutonModifier.addEventListener("click", function () {
 });
 
 // ==========================================
-// 23. SOUMISSION DU FORMULAIRE
+// 25. SOUMISSION DU FORMULAIRE
 // ==========================================
 
 formInvite.addEventListener("submit", async function (event) {
 
     event.preventDefault();
-
-    // Vérifier que le récapitulatif a été validé.
 
     if (!recapitulatifValide) {
 
@@ -947,24 +1014,17 @@ formInvite.addEventListener("submit", async function (event) {
 
     }
 
-    // Récupérer les informations.
-
     const nom = champNom.value.trim();
-
     const prenom = champPrenom.value.trim();
-
     const telephone = champTelephone.value.trim();
-
     const message = champMessage.value.trim();
-
-    // Vérification finale.
 
     if (
         !validerNomPrenom(nom) ||
         !validerNomPrenom(prenom) ||
         !validerTelephone(telephone) ||
         !validerSouhait(message) ||
-        !cadeauChoisi ||
+        cadeauxChoisis.length === 0 ||
         !acceptConditions.checked
     ) {
 
@@ -976,6 +1036,16 @@ formInvite.addEventListener("submit", async function (event) {
 
     }
 
+    // Récupérer les identifiants de tous les cadeaux.
+
+    const idsCadeaux = cadeauxChoisis.map(
+        cadeau => cadeau.id_cadeau
+    );
+
+    const nomsCadeaux = cadeauxChoisis.map(
+        cadeau => cadeau.nom
+    );
+
     const bouton = formInvite.querySelector(
         'button[type="submit"]'
     );
@@ -986,27 +1056,33 @@ formInvite.addEventListener("submit", async function (event) {
 
     try {
 
-        // Enregistrement dans Supabase.
+        // Enregistrer tous les cadeaux en une seule inscription.
 
         const resultat = await reserverCadeau(
             nom,
             prenom,
             telephone,
-            cadeauChoisi.id_cadeau,
+            idsCadeaux,
             message
         );
 
-        alert(
-            "Votre inscription a été enregistrée avec succès !\n" +
-            "Cadeau : " +
-            (resultat?.[0]?.nom_cadeau || cadeauChoisi.nom)
-        );
+        console.log("RESERVATIONS ENREGISTREES :", resultat);
 
-        // Réinitialisation.
+        // Afficher la confirmation.
+
+        messageConfirmation.textContent = nomsCadeaux.join(", ");
+
+        confirmation.hidden = false;
+
+        sectionInscription.hidden = true;
+
+        sectionCadeaux.hidden = true;
+
+        // Réinitialiser le formulaire.
 
         formInvite.reset();
 
-        cadeauChoisi = null;
+        cadeauxChoisis = [];
 
         recapitulatifValide = false;
 
@@ -1014,11 +1090,14 @@ formInvite.addEventListener("submit", async function (event) {
 
         boutonVerifier.hidden = false;
 
-        sectionInscription.hidden = true;
-
         // Actualiser les disponibilités.
 
         await chargerCadeaux();
+
+        confirmation.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
 
     }
 
@@ -1046,7 +1125,7 @@ formInvite.addEventListener("submit", async function (event) {
 });
 
 // ==========================================
-// 24. DEMARRER L'ECOUTE DES RESERVATIONS
+// 26. DEMARRER L'ECOUTE DES RESERVATIONS
 // ==========================================
 
 ecouterReservations();
