@@ -411,10 +411,12 @@ function estIndisponible(cadeau) {
 // 16. VISUELS DES CADEAUX
 // ==========================================
 
+
 function obtenirVisuel(nomCadeau) {
 
     const nom = normaliserNom(nomCadeau);
 
+    // Biberon, tétine et chauffe-biberon
     if (
         nom.includes("biberon") ||
         nom.includes("tetine") ||
@@ -426,16 +428,54 @@ function obtenirVisuel(nomCadeau) {
         };
     }
 
+    // Cadeaux de toilette avec images personnalisées
+    if (nom.includes("lait de corps")) {
+        return {
+            type: "image",
+            valeur: "images/lait_du_corps.jpeg"
+        };
+    }
+
+    if (nom.includes("gel nettoyant")) {
+        return {
+            type: "image",
+            valeur: "images/gel_nettoyant.jpeg"
+        };
+    }
+
+    if (nom.includes("eau de toilette")) {
+        return {
+            type: "image",
+            valeur: "images/eau_de_parfum.jpeg"
+        };
+    }
+
+    if (nom.includes("huile de massage") || nom.includes("huil de massage")) {
+        return {
+            type: "image",
+            valeur: "images/baby_oil.jpeg"
+        };
+    }
+
+    if (nom.includes("creme de change")) {
+        return {
+            type: "image",
+            valeur: "images/baby_cream.jpeg"
+        };
+    }
+
+    if (nom.includes("poudre")) {
+        return {
+            type: "image",
+            valeur: "images/baby_poudre.jpeg"
+        };
+    }
+
+    // Autres produits de toilette
     if (
         nom.includes("toilette") ||
         nom.includes("biolane") ||
-        nom.includes("mustela") ||
-        nom.includes("lait de corps") ||
-        nom.includes("gel nettoyant") ||
-        nom.includes("eau de toilette") ||
-        nom.includes("huile de massage") ||
-        nom.includes("creme de change") ||
-        nom.includes("poudre")
+        nom.includes("mustela")
     ) {
         return {
             type: "emoji",
@@ -443,6 +483,7 @@ function obtenirVisuel(nomCadeau) {
         };
     }
 
+    // Cadeau au choix
     if (nom.includes("cadeau au choix")) {
         return {
             type: "emoji",
@@ -450,6 +491,7 @@ function obtenirVisuel(nomCadeau) {
         };
     }
 
+    // Peluche et coussin
     if (
         nom.includes("peluche") ||
         nom.includes("coussin")
@@ -460,6 +502,7 @@ function obtenirVisuel(nomCadeau) {
         };
     }
 
+    // Enveloppe
     if (nom.includes("enveloppe")) {
         return {
             type: "emoji",
@@ -467,6 +510,7 @@ function obtenirVisuel(nomCadeau) {
         };
     }
 
+    // Images des autres cadeaux
     let image = "cadeaux/default.png";
 
     if (nom.includes("siege auto")) {
@@ -527,6 +571,7 @@ function obtenirVisuel(nomCadeau) {
     };
 
 }
+
 
 // ==========================================
 // 17. METTRE A JOUR LES CADEAUX SELECTIONNES
