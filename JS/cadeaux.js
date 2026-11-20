@@ -1,4 +1,3 @@
-
 import { supabase } from "./config/supabase.js";
 
 // ==========================================
@@ -6,6 +5,7 @@ import { supabase } from "./config/supabase.js";
 // ==========================================
 
 const confirmation = document.getElementById("confirmation");
+const messageHeader = document.getElementById("messageHeader");
 const messageConfirmation = document.getElementById("messageConfirmation");
 
 const modeEmploi = document.getElementById("modeEmploi");
@@ -49,6 +49,8 @@ let cadeauxChoisis = [];
 
 let abonnementReservations = null;
 let recapitulatifValide = false;
+let inscriptionEnCours = false;
+let inscriptionConfirmee = false;
 
 // ==========================================
 // 3. NORMALISER LES NOMS
@@ -91,6 +93,18 @@ function obtenirLimite(cadeau) {
     // Cadeaux illimités.
     if (estIllimite(cadeau.nom)) {
         return Infinity;
+    }
+
+    // Produits de toilette limités à 2 réservations.
+    if (
+        nom.includes("lait de corps") ||
+        nom.includes("gel nettoyant") ||
+        nom.includes("eau de toilette") ||
+        nom.includes("huile de massage") ||
+        nom.includes("creme de change") ||
+        nom.includes("poudre")
+    ) {
+        return 2;
     }
 
     // Cadeaux limités à une seule réservation.
@@ -332,6 +346,11 @@ function ecouterReservations() {
             async function (payload) {
 
                 console.log("Changement de réservation :", payload);
+
+                // Ne pas recharger pendant ou après notre inscription.
+                if (inscriptionEnCours || inscriptionConfirmee) {
+                    return;
+                }
 
                 await chargerCadeaux();
 
@@ -1054,9 +1073,11 @@ formInvite.addEventListener("submit", async function (event) {
 
     bouton.textContent = "Enregistrement en cours...";
 
+    inscriptionEnCours = true;
+
     try {
 
-        // Enregistrer tous les cadeaux en une seule inscription.
+         // Enregistrer tous les cadeaux en une seule inscription.
 
         const resultat = await reserverCadeau(
             nom,
@@ -1067,16 +1088,24 @@ formInvite.addEventListener("submit", async function (event) {
         );
 
         console.log("RESERVATIONS ENREGISTREES :", resultat);
+        inscriptionConfirmee = true;
+
+        messageHeader.textContent =
+            "Merci infiniment pour votre générosité et votre affection. " +
+            "Chaque geste compte pour accueillir notre merveille. ♡";
 
         // Afficher la confirmation.
 
-        messageConfirmation.textContent = nomsCadeaux.join(", ");
+        messageConfirmation.textContent =
+            nomsCadeaux.join(", ");
 
         confirmation.hidden = false;
 
-        sectionInscription.hidden = true;
+        // Masquer les autres sections.
 
+        sectionInscription.hidden = true;
         sectionCadeaux.hidden = true;
+        modeEmploi.hidden = true;
 
         // Réinitialiser le formulaire.
 
@@ -1090,9 +1119,7 @@ formInvite.addEventListener("submit", async function (event) {
 
         boutonVerifier.hidden = false;
 
-        // Actualiser les disponibilités.
-
-        await chargerCadeaux();
+        // Afficher directement la confirmation sans recharger les cadeaux.
 
         confirmation.scrollIntoView({
             behavior: "smooth",
@@ -1108,13 +1135,15 @@ formInvite.addEventListener("submit", async function (event) {
         await chargerCadeaux();
 
         alert(
-            "Impossible d'enregistrer votre inscription :\n" +
-            error.message
+        "Impossible d'enregistrer votre inscription :\n" +
+        error.message
         );
 
     }
 
     finally {
+
+        inscriptionEnCours = false;
 
         bouton.disabled = false;
 
