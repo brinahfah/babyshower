@@ -182,6 +182,77 @@
 
     </footer>
 
+    <!-- =================================
+     GUIDE D'UTILISATION
+================================= -->
+
+    <div id="guideOverlay" class="guide-overlay" hidden>
+
+        <div class="guide-modal" role="dialog"
+            aria-modal="true"
+            aria-labelledby="guideTitle">
+
+            <button
+                type="button"
+                id="btnFermerGuide"
+                class="guide-close"
+                aria-label="Fermer le guide">
+                ×
+            </button>
+
+            <div class="guide-decoration">♡</div>
+
+            <span class="guide-label">ELY&BRI • GUIDE D'ACCUEIL</span>
+
+            <div class="guide-progress">
+                <span id="guideProgressBar"></span>
+            </div>
+
+            <p class="guide-step" id="guideStep">ÉTAPE 1 SUR 5</p>
+
+            <div class="guide-icon" id="guideIcon">♡</div>
+
+            <h2 id="guideTitle">Bienvenue dans votre espace !</h2>
+
+            <p id="guideDescription">
+                Découvrez comment utiliser votre espace de gestion
+                en quelques étapes simples.
+            </p>
+
+            <div class="guide-tip" id="guideTip">
+                Un petit tour pour prendre vos marques en toute simplicité.
+            </div>
+
+            <div class="guide-navigation">
+
+                <button
+                    type="button"
+                    id="btnGuidePrecedent"
+                    class="guide-previous"
+                    hidden>
+                    Précédent
+                </button>
+
+                <button
+                    type="button"
+                    id="btnGuideSuivant"
+                    class="guide-next">
+                    Commencer →
+                </button>
+
+            </div>
+
+            <button
+                type="button"
+                id="btnPasserGuide"
+                class="guide-skip">
+                Passer la présentation
+            </button>
+
+        </div>
+
+    </div>
+
 
     <script type="module" src="../JS/admin.js"></script>
 

@@ -619,3 +619,373 @@ button:hover .button-arrow {
     }
 
 }
+
+/* ======================================
+   BOUTON GUIDE DU TABLEAU DE BORD
+====================================== */
+
+.welcome-label {
+    display: inline-block;
+    color: #b89570;
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.guide-button {
+    margin-top: 22px;
+    padding: 12px 22px;
+
+    background: #fffaf4;
+    color: #917456;
+
+    border: 1px solid #dfcbb5;
+    border-radius: 30px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.guide-button:hover {
+    background: #b89570;
+    color: white;
+    transform: translateY(-2px);
+}
+
+
+/* ======================================
+   FOND DE LA FENÊTRE
+====================================== */
+
+.guide-overlay[hidden] {
+    display: none !important;
+}
+
+.guide-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background: rgba(55, 43, 33, 0.58);
+    backdrop-filter: blur(7px);
+
+    animation: fadeGuide 0.3s ease;
+}
+
+.guide-open {
+    overflow: hidden;
+}
+
+@keyframes fadeGuide {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* ======================================
+   CARTE DU GUIDE
+====================================== */
+
+.guide-modal {
+    position: relative;
+
+    width: 100%;
+    max-width: 490px;
+
+    padding: 45px 38px 30px;
+
+    background: #fffdf9;
+
+    border: 1px solid #eadccc;
+    border-radius: 25px;
+
+    text-align: center;
+
+    box-shadow: 0 25px 70px rgba(0,0,0,0.16);
+
+    animation: guideAppear 0.4s ease;
+}
+
+@keyframes guideAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* FERMETURE */
+
+.guide-close {
+    position: absolute;
+    top: 15px;
+    right: 18px;
+
+    width: 35px;
+    height: 35px;
+
+    background: #f5eee5;
+    color: #8f755d;
+
+    border: none;
+    border-radius: 50%;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+.guide-close:hover {
+    background: #e8d7c4;
+}
+
+
+/* DECORATION */
+
+.guide-decoration {
+    color: #c9ad91;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.guide-label {
+    display: block;
+
+    color: #b89570;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+}
+
+
+/* PROGRESSION */
+
+.guide-progress {
+    width: 100%;
+    height: 5px;
+
+    background: #f0e8df;
+
+    border-radius: 10px;
+    overflow: hidden;
+
+    margin-bottom: 15px;
+}
+
+#guideProgressBar {
+    display: block;
+
+    width: 20%;
+    height: 100%;
+
+    background: linear-gradient(
+        to right,
+        #dfc6aa,
+        #aa8865
+    );
+
+    border-radius: 10px;
+
+    transition: width 0.4s ease;
+}
+
+.guide-step {
+    color: #ad947b;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 20px;
+}
+
+
+/* CONTENU */
+
+.guide-icon {
+    width: 75px;
+    height: 75px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto 20px;
+
+    background: #f6eee5;
+
+    border: 1px solid #ead8c5;
+    border-radius: 50%;
+
+    font-size: 30px;
+}
+
+.guide-modal h2 {
+    font-family: Georgia, serif;
+
+    color: #59483b;
+
+    font-size: 25px;
+    font-weight: 400;
+
+    line-height: 1.4;
+
+    margin-bottom: 15px;
+}
+
+#guideDescription {
+    color: #938477;
+
+    font-size: 14px;
+    line-height: 1.9;
+
+    margin-bottom: 22px;
+}
+
+
+/* CONSEIL */
+
+.guide-tip {
+    padding: 15px;
+
+    background: #f8f2eb;
+
+    border-left: 3px solid #c9ad91;
+    border-radius: 8px;
+
+    color: #8f755d;
+
+    font-size: 12px;
+    line-height: 1.7;
+
+    text-align: left;
+
+    margin-bottom: 25px;
+}
+
+
+/* NAVIGATION */
+
+.guide-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+.guide-next,
+.guide-previous {
+    min-height: 45px;
+
+    padding: 12px 20px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.guide-next {
+    flex: 1;
+
+    background: #a98a6b;
+    color: white;
+
+    border: none;
+}
+
+.guide-next:hover {
+    background: #8f755d;
+    transform: translateY(-2px);
+}
+
+.guide-previous {
+    background: #fffdf9;
+    color: #8f755d;
+
+    border: 1px solid #dfcbb5;
+}
+
+.guide-previous:hover {
+    background: #f5eee5;
+}
+
+.guide-skip {
+    margin-top: 18px;
+
+    background: transparent;
+    border: none;
+
+    color: #a99a8b;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+.guide-skip:hover {
+    color: #8f755d;
+}
+
+
+/* ACCESSIBILITE */
+
+.guide-modal button:focus-visible,
+.guide-button:focus-visible {
+    outline: 3px solid #c9ad91;
+    outline-offset: 3px;
+}
+
+
+/* ======================================
+   RESPONSIVE
+====================================== */
+
+@media screen and (max-width: 500px) {
+
+    .guide-modal {
+        padding: 40px 22px 25px;
+        border-radius: 20px;
+    }
+
+    .guide-modal h2 {
+        font-size: 22px;
+    }
+
+    #guideDescription {
+        font-size: 13px;
+    }
+
+    .guide-next,
+    .guide-previous {
+        padding: 11px 13px;
+        font-size: 12px;
+    }
+
+}

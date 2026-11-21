@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ELY&BRI - Gestion des réservations</title>
+
+    <link rel="stylesheet" href="../CSS/reservations.css">
+</head>
+
+<body>
+
+    <header class="reservations-header">
+
+        <div class="brand">
+            ELY&BRI ♡
+        </div>
+
+        <a href="dashboard.html" class="retour-dashboard">
+            ← Tableau de bord
+        </a>
+
+    </header>
+
+    <main class="reservations-container">
+
+        <section class="page-intro">
+
+            <h1>Gestion des réservations</h1>
+
+            <p>
+                Consultez les cadeaux réservés par vos invités.
+            </p>
+
+        </section>
+
+        
+        
+        <section class="reservations-summary">
+
+            <div class="summary-card">
+                <span class="summary-label">Invités inscrits</span>
+                <strong id="totalInvites">0</strong>
+            </div>
+
+            <div class="summary-card">
+                <span class="summary-label">Cadeaux réservés</span>
+                <strong id="totalCadeaux">0</strong>
+            </div>
+
+        </section>
+
+
+        <section class="reservations-content">
+
+            <div class="reservations-toolbar">
+
+                <div class="search-container">
+                    <input
+                        type="search"
+                        id="rechercheReservation"
+                        placeholder="Rechercher un invité ou un cadeau..."
+                    >
+                </div>
+
+                <button
+                    type="button"
+                    id="btnActualiser"
+                    class="btn-actualiser"
+                >
+                    ↻ Actualiser
+                </button>
+
+            </div>
+
+            <div id="messageChargement" class="message-etat">
+                Chargement des réservations...
+            </div>
+
+            <div id="messageErreur" class="message-erreur" hidden>
+            </div>
+
+            <div class="table-container">
+
+                <table>
+
+                    
+                    <thead>
+                        <tr>
+                            <th>Date d'inscription</th>
+                            <th>Nom de l'invité</th>
+                            <th>Téléphone</th>
+                            <th>Cadeaux réservés</th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody id="listeReservations">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div id="messageVide" class="message-etat" hidden>
+                Aucune réservation trouvée.
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+
+            <div class="footer-content">
+
+                <!-- LOGO -->
+                <div class="footer-brand">
+
+                    <div class="logo-orb">
+                        <img
+                            src="../images/Monogramme calligraphique doré sur noir.png"
+                            alt="Logo ELY&BRI"
+                            class="footer-logo"
+                        >
+                    </div>
+
+                    <h2>ELY&BRI</h2>
+
+                    <p class="brand-description">
+                        S'amuser en créant 
+                    </p>
+
+                </div>
+
+                <!-- CONTACT -->
+                <div class="footer-section">
+
+                    <h3>CONTACT</h3>
+
+                    <a href="https://mail.google.com/mail/u/0/#inbox">
+                        ✉ ebikie4@gmail.com
+                    </a>
+
+                    <a href="https://github.com/brinahfah"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                        ♧ GitHub
+                    </a>
+
+                </div>
+
+                <!-- SIGNATURE -->
+                <div class="footer-signature">
+
+                    <p class="signature-text">
+                        Créé avec passion
+                    </p>
+
+                    <span class="signature-name">
+                        ELY&BRI
+                    </span>
+
+                    <p class="signature-date">
+                        Design • Créativité • Animation
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- SEPARATEUR -->
+            <div class="footer-line"></div>
+
+            <!-- COPYRIGHT -->
+            <div class="footer-bottom">
+
+                <p>© 2026 ELY&BRI — Tous droits réservés.</p>
+
+                <p>Fait avec ♡ et beaucoup de créativité.</p>
+
+            </div>
+
+        </footer>
+
+    <script type="module" src="../JS/reservations.js"></script>
+
+</body>
+
+</html>

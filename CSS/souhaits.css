@@ -1,0 +1,1190 @@
+
+/* ================================= */
+/* BASE */
+/* ================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: Georgia, "Times New Roman", serif;
+    color: #66534a;
+    background:
+        radial-gradient(ellipse at top, #fffdf9, #f3ece3);
+}
+
+/* ================================= */
+/* HEADER */
+/* ================================= */
+
+.souhaits-header {
+    min-height: 75px;
+    padding: 18px 6%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    background: rgba(255, 253, 249, 0.95);
+    border-bottom: 1px solid #e9dccd;
+}
+
+.brand {
+    text-align: center;
+    color: #a77b72;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.retour-dashboard {
+    text-decoration: none;
+    color: #94746b;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+}
+
+.retour-dashboard:hover {
+    color: #bd8b83;
+}
+
+.header-label {
+    text-align: right;
+    color: #a18a7d;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* ================================= */
+/* INTRODUCTION */
+/* ================================= */
+
+.souhaits-container {
+    width: 92%;
+    max-width: 1100px;
+    margin: 45px auto;
+    flex: 1;
+}
+
+.page-intro {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.intro-decoration {
+    color: #c5a36d;
+    font-size: 23px;
+}
+
+.page-intro h1 {
+    margin: 8px 0;
+    color: #84665d;
+    font-size: 32px;
+    font-weight: normal;
+}
+
+.page-intro p {
+    color: #a18d81;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* ================================= */
+/* RECHERCHE */
+/* ================================= */
+
+.livre-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin: 0 auto 28px;
+    max-width: 900px;
+}
+
+.livre-toolbar input {
+    width: 100%;
+    max-width: 430px;
+    padding: 12px 16px;
+    border: 1px solid #e5d8ca;
+    border-radius: 30px;
+    outline: none;
+    background: #fffdf9;
+    color: #66534a;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+}
+
+.livre-toolbar input:focus {
+    border-color: #bd9b76;
+    box-shadow: 0 0 0 3px rgba(189, 155, 118, 0.12);
+}
+
+.total-souhaits {
+    color: #9c8173;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+/* ================================= */
+/* LIVRE OUVERT */
+/* ================================= */
+
+.livre {
+    max-width: 1000px;
+    margin: 0 auto;
+    perspective: 1800px;
+}
+
+.livre-pages {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 490px;
+    filter: drop-shadow(0 16px 20px rgba(92, 66, 48, 0.15));
+}
+
+/* Pages */
+
+.page {
+    position: relative;
+    overflow: hidden;
+    background-color: #fffdf6;
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            rgba(183, 151, 111, 0.025) 0px,
+            rgba(183, 151, 111, 0.025) 1px,
+            transparent 1px,
+            transparent 5px
+        );
+}
+
+.page-gauche {
+    border-radius: 8px 0 0 8px;
+    border-right: 1px solid #e4d6c4;
+    box-shadow: inset -12px 0 18px -18px #80624d;
+}
+
+.page-droite {
+    border-radius: 0 8px 8px 0;
+    border-left: 1px solid #e7d9c8;
+    box-shadow: inset 12px 0 18px -18px #80624d;
+}
+
+/* Reliure */
+
+.livre-pages::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 13px;
+    transform: translateX(-50%);
+    background: linear-gradient(
+        to right,
+        rgba(100, 73, 54, 0.10),
+        rgba(255, 255, 255, 0.7),
+        rgba(100, 73, 54, 0.10)
+    );
+    pointer-events: none;
+}
+
+/* ================================= */
+/* PAGE GAUCHE */
+/* ================================= */
+
+.page-gauche-contenu {
+    min-height: 490px;
+    padding: 65px 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.ornement {
+    color: #c5a36d;
+    font-size: 34px;
+    margin-bottom: 25px;
+}
+
+.petit-titre {
+    color: #b18c67;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+}
+
+.page-gauche h2 {
+    margin: 25px 0;
+    color: #85645a;
+    font-size: 30px;
+    line-height: 1.5;
+    font-weight: normal;
+}
+
+.separateur {
+    color: #c6a36d;
+    font-size: 21px;
+    margin-bottom: 20px;
+}
+
+.texte-intro {
+    max-width: 300px;
+    margin: 8px 0;
+    color: #9a8678;
+    font-size: 15px;
+    line-height: 1.8;
+    font-style: italic;
+}
+
+.signature-livre {
+    margin-top: 25px;
+    color: #ad8877;
+    font-size: 19px;
+    font-style: italic;
+}
+
+.numero-page-gauche {
+    position: absolute;
+    bottom: 22px;
+    left: 0;
+    right: 0;
+    color: #c2aa8f;
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+/* ================================= */
+/* PAGE DROITE */
+/* ================================= */
+
+.page-droite-contenu {
+    position: relative;
+    min-height: 490px;
+    padding: 55px 55px 65px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page-droite .petit-titre {
+    text-align: center;
+}
+
+.ornement-haut {
+    margin: 35px 0 25px;
+    color: #c5a36d;
+    font-size: 30px;
+}
+
+.texte-message {
+    width: 100%;
+    min-height: 140px;
+    color: #766259;
+    font-size: 19px;
+    line-height: 1.9;
+    text-align: center;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-style: italic;
+}
+
+.signature {
+    width: 100%;
+    margin-top: auto;
+    padding-top: 35px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.signature-label {
+    color: #a18c7e;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.signature strong {
+    color: #a77b72;
+    font-size: 22px;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.date-message {
+    width: 100%;
+    margin-top: 25px;
+    text-align: center;
+    color: #b29b87;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+}
+
+.numero-page {
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    color: #b9a28e;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+}
+
+
+/* ================================= */
+/* NAVIGATION */
+/* ================================= */
+
+.navigation-livre {
+    max-width: 800px;
+    margin: 28px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+}
+
+.btn-page {
+    min-width: 130px;
+    padding: 12px 20px;
+    border: 1px solid #c9ad8d;
+    border-radius: 30px;
+    background: #fffdf8;
+    color: #8e7062;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.btn-page:hover:not(:disabled) {
+    background: #b18c73;
+    color: white;
+}
+
+.btn-page:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.compteur-pages {
+    color: #9d8172;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+/* ================================= */
+/* ETATS ET ERREURS */
+/* ================================= */
+
+.message-etat {
+    padding: 30px;
+    text-align: center;
+    color: #9c8578;
+    font-family: Arial, sans-serif;
+}
+
+.message-erreur {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 8px;
+    background: #fff0ef;
+    color: #a84f4f;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.message-vide {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 45px 25px;
+    text-align: center;
+    background: #fffdf8;
+    border: 1px solid #eadfd4;
+    border-radius: 12px;
+}
+
+.message-vide span {
+    color: #c5a36d;
+    font-size: 35px;
+}
+
+.message-vide h2 {
+    margin: 18px 0 10px;
+    color: #84665d;
+    font-weight: normal;
+}
+
+.message-vide p {
+    color: #9a8678;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+
+/* ================================= */
+/* RESPONSIVE */
+/* ================================= */
+
+@media screen and (max-width: 700px) {
+
+    .souhaits-header {
+        padding: 16px 5%;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 12px;
+    }
+
+    .brand {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        font-size: 22px;
+    }
+
+    .retour-dashboard {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .header-label {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .souhaits-container {
+        width: 94%;
+        margin: 30px auto;
+    }
+
+    .page-intro h1 {
+        font-size: 25px;
+    }
+
+    .livre-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .livre-toolbar input {
+        max-width: none;
+    }
+
+    .total-souhaits {
+        text-align: center;
+    }
+
+    .livre-pages {
+        grid-template-columns: 1fr;
+    }
+
+    .page-gauche {
+        display: none;
+    }
+
+    .page-droite {
+        border-radius: 8px;
+        border: 1px solid #e7d9c8;
+    }
+
+    .page-droite-contenu {
+        min-height: 440px;
+        padding: 40px 25px 60px;
+    }
+
+    .texte-message {
+        font-size: 17px;
+    }
+
+    .navigation-livre {
+        gap: 10px;
+    }
+
+    .btn-page {
+        min-width: 0;
+        padding: 11px 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-droite.tourner {
+        animation: none;
+    }
+}
+
+.livre-pages {
+    position: relative;
+}
+
+.livre-toolbar .btn-page {
+    min-width: auto;
+    white-space: nowrap;
+}
+
+.livre-toolbar .btn-page:disabled {
+    opacity: 0.5;
+}
+
+
+/* =================================
+   FOOTER ELY&BRI
+================================= */
+
+.main-footer {
+
+    width: 100%;
+    margin-top: auto;
+    padding: 45px 7% 20px;
+
+    background: #100e0c;
+    color: #e9d8c2;
+
+    text-align: center;
+
+    border-top: 1px solid rgba(184, 139, 75, 0.4);
+
+}
+
+/* CONTENU PRINCIPAL */
+
+.footer-content {
+
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 45px;
+
+}
+
+/* IDENTITE DE MARQUE */
+
+.footer-brand {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.logo-orb {
+
+    width: 90px;
+    height: 90px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid #b88b4b;
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 15px rgba(184, 139, 75, 0.15);
+
+}
+
+.footer-logo {
+
+    width: 70px;
+    height: 70px;
+
+    object-fit: cover;
+    border-radius: 50%;
+
+    animation: rotateLogo 12s linear infinite;
+
+}
+
+@keyframes rotateLogo {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+.footer-brand h2 {
+
+    color: #d4af70;
+    letter-spacing: 5px;
+    font-size: 21px;
+
+}
+
+.brand-description {
+
+    color: #b7a58d;
+    font-size: 13px;
+    font-style: italic;
+
+}
+
+/* CONTACT */
+
+.footer-section {
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.footer-section h3 {
+
+    color: #d4af70;
+    letter-spacing: 3px;
+    font-size: 14px;
+    margin-bottom: 5px;
+
+}
+
+.footer-section a {
+
+    color: #e9d8c2;
+    text-decoration: none;
+    font-size: 14px;
+
+    transition: 0.3s ease;
+
+}
+
+.footer-section a:hover {
+
+    color: #d4af70;
+    transform: translateY(-2px);
+
+}
+
+/* SIGNATURE */
+
+.footer-signature {
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.signature-text {
+
+    font-size: 14px;
+    color: #b7a58d;
+
+}
+
+.signature-name {
+
+    font-family: "Brush Script MT", cursive;
+    font-size: 38px;
+    font-style: italic;
+
+    color: #d4af70;
+
+    text-shadow:
+        0 0 12px rgba(212, 175, 112, 0.25);
+
+}
+
+.signature-date {
+
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #95836c;
+
+}
+
+/* SEPARATEUR */
+
+.footer-line {
+
+    max-width: 1100px;
+    width: 100%;
+
+    height: 1px;
+    margin: 35px auto 20px;
+
+    background: linear-gradient(
+        to right,
+        transparent,
+        #b88b4b,
+        transparent
+    );
+
+}
+
+/* BAS DU FOOTER */
+
+.footer-bottom {
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    max-width: 1100px;
+    margin: auto;
+
+    color: #95836c;
+    font-size: 11px;
+
+}
+
+/* RESPONSIVE MOBILE */
+
+@media screen and (max-width: 600px) {
+
+    .main-footer {
+
+        padding: 40px 20px 20px;
+
+    }
+
+    .footer-content {
+
+        flex-direction: column;
+        gap: 35px;
+
+    }
+
+    .footer-bottom {
+
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+
+    }
+
+}
+
+
+/* ==========================================
+   RESPONSIVE - LIVRE D'OR ELY&BRI
+========================================== */
+
+/* Empêcher les débordements horizontaux */
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.souhaits-container {
+    width: 90%;
+    max-width: 1150px;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 0;
+}
+
+.livre,
+.livre-pages,
+.page {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.texte-message {
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+/* ==========================================
+   TABLETTES
+========================================== */
+
+@media screen and (max-width: 900px) {
+
+    .souhaits-container {
+        width: 94%;
+    }
+
+    .livre-pages {
+        width: 100%;
+    }
+
+    .page {
+        min-width: 0;
+    }
+
+    .page-gauche-contenu,
+    .page-droite-contenu {
+        padding: 25px;
+    }
+
+    .page-gauche h2 {
+        font-size: clamp(22px, 3vw, 30px);
+    }
+
+    .texte-intro,
+    .texte-message {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+}
+
+/* ==========================================
+   TELEPHONES
+========================================== */
+
+@media screen and (max-width: 600px) {
+
+    .souhaits-header {
+        padding: 15px 4%;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .brand {
+        font-size: 19px;
+    }
+
+    .retour-dashboard {
+        font-size: 12px;
+    }
+
+    .header-label {
+        font-size: 12px;
+    }
+
+    .souhaits-container {
+        width: 94%;
+        margin: 25px auto;
+    }
+
+    /* Introduction */
+    .page-intro {
+        text-align: center;
+        padding: 0 8px;
+    }
+
+    .page-intro h1 {
+        font-size: 25px;
+        line-height: 1.3;
+    }
+
+    .page-intro p {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    /* Barre de recherche */
+    .livre-toolbar {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .livre-toolbar input {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .livre-toolbar .btn-page {
+        width: 100%;
+    }
+
+    .total-souhaits {
+        text-align: center;
+    }
+
+    /* Livre ouvert : une seule page */
+    .livre {
+        width: 100%;
+        margin: 20px auto;
+    }
+
+    .livre-pages {
+        display: block;
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* Cacher la page de présentation */
+    .page-gauche {
+        display: none;
+    }
+
+    /* La page du message prend toute la largeur */
+    .page-droite {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        min-height: 390px;
+        height: auto;
+        margin: 0 auto;
+        border-radius: 12px;
+        box-sizing: border-box;
+    }
+
+    .page-droite-contenu {
+        width: 100%;
+        min-width: 0;
+        min-height: 390px;
+        height: auto;
+        padding: 28px 20px;
+        box-sizing: border-box;
+    }
+
+    /* Message */
+    .texte-message {
+        width: 100%;
+        max-width: 100%;
+        font-size: 15px;
+        line-height: 1.8;
+        overflow-wrap: anywhere;
+        word-break: normal;
+    }
+
+    .petit-titre {
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-align: center;
+    }
+
+    .ornement-haut {
+        font-size: 25px;
+        margin: 12px 0;
+    }
+
+    .signature {
+        margin-top: 25px;
+        text-align: right;
+    }
+
+    .signature-label {
+        font-size: 12px;
+    }
+
+    .signature strong {
+        display: block;
+        font-size: 17px;
+        overflow-wrap: anywhere;
+    }
+
+    .date-message {
+        margin-top: 18px;
+        font-size: 12px;
+    }
+
+    .numero-page {
+        margin-top: 20px;
+    }
+
+    /* Navigation */
+    .navigation-livre {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin: 20px auto;
+    }
+
+    .navigation-livre .btn-page {
+        flex: 1;
+        min-width: 0;
+        padding: 12px 8px;
+        font-size: 12px;
+    }
+
+    .compteur-pages {
+        flex-shrink: 0;
+        font-size: 12px;
+    }
+
+    /* Message vide */
+    .message-vide {
+        width: 100%;
+        padding: 25px 15px;
+        text-align: center;
+    }
+
+    .message-vide h2 {
+        font-size: 21px;
+    }
+
+    .message-vide p {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+}
+
+/* ==========================================
+   TRES PETITS TELEPHONES
+========================================== */
+
+@media screen and (max-width: 380px) {
+
+    .souhaits-container {
+        width: 96%;
+    }
+
+    .page-droite-contenu {
+        padding: 24px 15px;
+    }
+
+    .texte-message {
+        font-size: 14px;
+    }
+
+    .page-droite {
+        min-height: 350px;
+    }
+
+    .navigation-livre .btn-page {
+        font-size: 11px;
+        padding: 10px 5px;
+    }
+}
+
+
+/* =========================================
+   EFFET LIVRE 3D - TOURNER UNE PAGE
+========================================= */
+
+.page-droite {
+    position: relative;
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    overflow: hidden;
+}
+
+/* Verso de la feuille */
+.page-droite::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            to left,
+            #e8dccb,
+            #fffdf6 35%,
+            #f0e5d7
+        );
+
+    border: 1px solid #e4d5c3;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+}
+
+/* Animation de rotation */
+.page-droite.tourner {
+    animation: vraieTourneePage 0.45s ease-in-out;
+}
+
+@keyframes vraieTourneePage {
+    0% {
+        transform: rotateY(0deg);
+        box-shadow: none;
+    }
+
+    25% {
+        box-shadow: -12px 8px 20px rgba(70, 45, 30, 0.18);
+    }
+
+    48% {
+        transform: rotateY(-180deg);
+        box-shadow: -15px 8px 25px rgba(70, 45, 30, 0.25);
+    }
+
+    52% {
+        transform: rotateY(-180deg);
+    }
+
+    100% {
+        transform: rotateY(0deg);
+        box-shadow: none;
+    }
+}
+
+/* =========================================
+   VERSION MOBILE : UNE SEULE PAGE
+========================================= */
+
+@media screen and (max-width: 700px) {
+
+    .livre {
+        perspective: 1600px;
+        perspective-origin: left center;
+    }
+
+    .livre-pages {
+        display: block;
+        position: relative;
+        overflow: visible;
+        filter: drop-shadow(0 12px 16px rgba(92, 66, 48, 0.13));
+    }
+
+    /* On supprime la reliure centrale */
+    .livre-pages::after {
+        display: none !important;
+    }
+
+    .page-gauche {
+        display: none !important;
+    }
+
+    .page-droite {
+        width: 100%;
+        border: none !important;
+        border-radius: 10px;
+        box-shadow:
+            inset 0 0 0 1px #eadfd2,
+            0 4px 12px rgba(92, 66, 48, 0.08);
+        transform-origin: left center;
+        transform-style: preserve-3d;
+    }
+
+    .page-droite-contenu {
+        min-height: 440px;
+        padding: 40px 25px 60px;
+    }
+
+    .texte-message {
+        font-size: 17px;
+        line-height: 1.8;
+        overflow-wrap: anywhere;
+    }
+}
+
+/* Respect des préférences d'accessibilité */
+@media (prefers-reduced-motion: reduce) {
+    .page-droite.tourner {
+        animation: none;
+    }
+}

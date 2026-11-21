@@ -11,7 +11,6 @@ const messageErreur = document.getElementById("messageErreur");
 
 const btnDeconnexion = document.getElementById("btnDeconnexion");
 
-
 // ======================================
 // AFFICHER UNE ERREUR
 // ======================================
@@ -142,6 +141,10 @@ async function protegerDashboard() {
         chargement.hidden = true;
         contenuDashboard.hidden = false;
 
+        
+
+        
+
         console.log("BabyShower : tableau de bord chargé.");
 
     } catch (error) {
@@ -195,3 +198,15 @@ btnDeconnexion.addEventListener("click", async function() {
 // ======================================
 
 protegerDashboard();
+
+// ======================================
+// BOUTON POUR REVOIR LE GUIDE
+// ======================================
+
+const btnOuvrirGuide = document.getElementById("btnOuvrirGuide");
+
+if (btnOuvrirGuide) {
+    btnOuvrirGuide.addEventListener("click", () => {
+        window.location.href = "connexion.html?guide=ouvrir";
+    });
+}

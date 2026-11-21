@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BabyShower - Livre d'or</title>
+
+    <link rel="stylesheet" href="../CSS/souhaits.css">
+</head>
+
+<body>
+
+    <header class="souhaits-header">
+        <a href="dashboard.html" class="retour-dashboard">
+            ← Tableau de bord
+        </a>
+
+        <div class="brand">BabyShower ♡</div>
+
+        <div class="header-label">Livre d'or</div>
+    </header>
+
+    <main class="souhaits-container">
+
+        <section class="page-intro">
+            <span class="intro-decoration">✧</span>
+            <h1>Le livre de vos souvenirs</h1>
+            <p>Les petits mots précieux laissés par vos invités.</p>
+        </section>
+
+        <section class="livre-toolbar">
+
+            <input
+                type="search"
+                id="rechercheSouhait"
+                placeholder="Retrouver un invité ou un message..."
+                aria-label="Rechercher un message"
+            >
+
+            <button type="button" id="btnActualiser" class="btn-page">
+                ↻ Actualiser
+            </button>
+
+            <span id="totalSouhaits" class="total-souhaits">
+                0 message
+            </span>
+
+        </section>
+
+        <div id="messageChargement" class="message-etat">
+            Ouverture du livre...
+        </div>
+
+        <div id="messageErreur" class="message-erreur" hidden></div>
+
+        <section id="livre" class="livre" hidden>
+
+            <div class="livre-pages">
+
+                <!-- PAGE GAUCHE -->
+                <div class="page page-gauche">
+
+                    <div class="page-gauche-contenu">
+
+                        <span class="ornement">✧</span>
+
+                        <p class="petit-titre">BabyShower</p>
+
+                        <h2>
+                            Un livre rempli
+                            de tendresse
+                        </h2>
+
+                        <div class="separateur">♡</div>
+
+                        <p class="texte-intro">
+                            Chaque mot, chaque pensée et chaque
+                            attention rendent cette aventure
+                            encore plus belle.
+                        </p>
+
+                        <p class="texte-intro">
+                            Merci à tous ceux qui partagent
+                            ce joli moment avec nous.
+                        </p>
+
+                        <span class="signature-livre">
+                            Avec amour ♡
+                        </span>
+
+                        <span class="numero-page-gauche">ELY&BRI</span>
+
+                    </div>
+
+                </div>
+
+                <!-- PAGE DROITE -->
+                <div class="page page-droite" id="pageMessage">
+
+                    <div class="page-droite-contenu">
+
+                        <span class="petit-titre">
+                            UN PETIT MOT POUR VOUS
+                        </span>
+
+                        <div class="ornement-haut">❦</div>
+
+                        <p id="texteMessage" class="texte-message"></p>
+
+                        <div class="signature">
+                            <span class="signature-label">
+                                Avec toute mon affection,
+                            </span>
+
+                            <strong id="nomInvite"></strong>
+                        </div>
+
+                        <div class="date-message">
+                            <span id="dateSouhait"></span>
+                        </div>
+
+                        <span id="numeroPage" class="numero-page">
+                            1 / 1
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <div id="messageVide" class="message-vide" hidden>
+            <span>♡</span>
+            <h2>Les pages sont encore vierges</h2>
+            <p>
+                Les messages de vos invités apparaîtront ici
+                lorsqu'ils auront laissé un petit mot.
+            </p>
+        </div>
+
+        <!-- NAVIGATION DU LIVRE -->
+        <section id="navigationLivre" class="navigation-livre" hidden>
+
+            <button
+                type="button"
+                id="pagePrecedente"
+                class="btn-page"
+                aria-label="Page précédente"
+            >
+                ← Précédent
+            </button>
+
+            <span id="compteurPages" class="compteur-pages">
+                1 / 1
+            </span>
+
+            <button
+                type="button"
+                id="pageSuivante"
+                class="btn-page"
+                aria-label="Page suivante"
+            >
+                Suivant →
+            </button>
+
+        </section>
+
+    </main>
+     
+    <footer class="main-footer">
+
+            <div class="footer-content">
+
+                <!-- LOGO -->
+                <div class="footer-brand">
+
+                    <div class="logo-orb">
+                        <img
+                            src="../images/Monogramme calligraphique doré sur noir.png"
+                            alt="Logo ELY&BRI"
+                            class="footer-logo"
+                        >
+                    </div>
+
+                    <h2>ELY&BRI</h2>
+
+                    <p class="brand-description">
+                        S'amuser en créant 
+                    </p>
+
+                </div>
+
+                <!-- CONTACT -->
+                <div class="footer-section">
+
+                    <h3>CONTACT</h3>
+
+                    <a href="https://mail.google.com/mail/u/0/#inbox">
+                        ✉ ebikie4@gmail.com
+                    </a>
+
+                    <a href="https://github.com/brinahfah"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                        ♧ GitHub
+                    </a>
+
+                </div>
+
+                <!-- SIGNATURE -->
+                <div class="footer-signature">
+
+                    <p class="signature-text">
+                        Créé avec passion
+                    </p>
+
+                    <span class="signature-name">
+                        ELY&BRI
+                    </span>
+
+                    <p class="signature-date">
+                        Design • Créativité • Animation
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- SEPARATEUR -->
+            <div class="footer-line"></div>
+
+            <!-- COPYRIGHT -->
+            <div class="footer-bottom">
+
+                <p>© 2026 ELY&BRI — Tous droits réservés.</p>
+
+                <p>Fait avec ♡ et beaucoup de créativité.</p>
+
+            </div>
+
+    </footer>
+
+    <script type="module" src="../JS/souhaits.js"></script>
+
+</body>
+</html>
+
+
+    
+
+  

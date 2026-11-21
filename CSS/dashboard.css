@@ -506,3 +506,40 @@
                 grid-template-columns: 1fr;
             }
         }
+
+
+/* ======================================
+   BOUTON GUIDE DU TABLEAU DE BORD
+====================================== */
+
+.welcome-label {
+    display: inline-block;
+    color: #b89570;
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.guide-button {
+    margin-top: 22px;
+    padding: 12px 22px;
+
+    background: #fffaf4;
+    color: #917456;
+
+    border: 1px solid #dfcbb5;
+    border-radius: 30px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.guide-button:hover {
+    background: #b89570;
+    color: white;
+    transform: translateY(-2px);
+}
