@@ -1,0 +1,600 @@
+
+/* =====================================
+   RESET
+===================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #faf6f0;
+    color: #594638;
+    font-family: Arial, sans-serif;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+.page-header {
+    background: #fffdf9;
+    padding: 20px 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid #eee4d9;
+}
+
+.brand {
+    color: #8c7059;
+    font-family: Georgia, serif;
+    font-size: 27px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.back-button {
+    text-decoration: none;
+    color: #80634f;
+    background: #fffaf5;
+    border: 1px solid #d9c5b1;
+
+    padding: 11px 20px;
+    border-radius: 25px;
+
+    transition: 0.2s;
+}
+
+.back-button:hover {
+    background: #f2e7dc;
+}
+
+
+/* =====================================
+   CONTENU PRINCIPAL
+===================================== */
+
+.page-main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 45px auto;
+}
+
+.page-intro {
+    margin-bottom: 30px;
+}
+
+.eyebrow {
+    color: #b18c69;
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.page-intro h1 {
+    font-family: Georgia, serif;
+    font-size: 34px;
+    font-weight: normal;
+    color: #765c49;
+    margin: 12px 0;
+}
+
+.page-intro p {
+    color: #927e6c;
+    line-height: 1.7;
+}
+
+
+/* =====================================
+   CARTE STATISTIQUE
+===================================== */
+
+.guest-summary {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    background: #f3e8e9;
+    border: 1px solid #ead8d8;
+    border-radius: 15px;
+
+    padding: 22px 28px;
+    max-width: 340px;
+    margin-bottom: 40px;
+}
+
+.summary-icon {
+    font-size: 32px;
+}
+
+.summary-label {
+    display: block;
+    color: #806c5b;
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+
+.guest-summary strong {
+    font-family: Georgia, serif;
+    font-size: 28px;
+    color: #725a47;
+}
+
+
+/* =====================================
+   SECTION INVITES
+===================================== */
+
+.guest-section {
+    background: #fffdf9;
+    border: 1px solid #eee4d9;
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.section-heading h2 {
+    font-family: Georgia, serif;
+    font-weight: normal;
+    font-size: 23px;
+    color: #765c49;
+    margin: 0 0 8px;
+}
+
+.section-heading p {
+    color: #968273;
+    font-size: 14px;
+    margin: 0;
+}
+
+
+/* =====================================
+   BOUTON ACTUALISER
+===================================== */
+
+.refresh-button {
+    padding: 11px 18px;
+    border-radius: 25px;
+
+    border: 1px solid #d9c5b1;
+    background: #fffaf5;
+    color: #80634f;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.refresh-button:hover {
+    background: #f2e7dc;
+}
+
+.refresh-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* =====================================
+   RECHERCHE
+===================================== */
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    background: #faf6f0;
+    border: 1px solid #eadfd3;
+    border-radius: 12px;
+
+    padding: 0 16px;
+    margin-bottom: 25px;
+}
+
+.search-container span {
+    color: #a88b69;
+    font-size: 25px;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 15px 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+    color: #594638;
+    font-size: 14px;
+}
+
+.search-container:focus-within {
+    border-color: #b99a78;
+}
+
+
+/* =====================================
+   TABLEAU
+===================================== */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+thead {
+    background: #f3e8e9;
+}
+
+th {
+    padding: 17px 15px;
+    color: #765c49;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+td {
+    padding: 17px 15px;
+    border-bottom: 1px solid #eee4d9;
+    color: #806c5b;
+    font-size: 14px;
+}
+
+tbody tr:hover {
+    background: #fdf9f4;
+}
+
+.empty-message {
+    text-align: center;
+    padding: 30px 10px;
+    color: #927e6c;
+    font-size: 14px;
+}
+
+
+/* =====================================
+   MESSAGES
+===================================== */
+
+.status-message,
+.error-message {
+    text-align: center;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 20px 0;
+}
+
+.status-message {
+    color: #806c5b;
+    background: #faf6f0;
+}
+
+.error-message {
+    color: #a33e3e;
+    background: #fff0ed;
+}
+
+.result-count {
+    color: #a18e7c;
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+[hidden] {
+    display: none !important;
+}
+
+@media (max-width: 600px) {
+
+    .page-header {
+        padding: 18px 5%;
+    }
+
+    .brand {
+        font-size: 21px;
+    }
+
+    .back-button {
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+
+    .page-main {
+        width: 90%;
+        margin: 30px auto;
+    }
+
+    .page-intro h1 {
+        font-size: 27px;
+    }
+
+    .guest-section {
+        padding: 18px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .guest-summary {
+        width: 100%;
+        max-width: none;
+    }
+
+    th,
+    td {
+        padding: 14px 12px;
+        white-space: nowrap;
+    }
+}
+/* =================================
+   FOOTER ELY&BRI
+================================= */
+
+.main-footer {
+
+    width: 100%;
+    margin-top: auto;
+    padding: 45px 7% 20px;
+
+    background: #100e0c;
+    color: #e9d8c2;
+
+    text-align: center;
+
+    border-top: 1px solid rgba(184, 139, 75, 0.4);
+
+}
+
+/* CONTENU PRINCIPAL */
+
+.footer-content {
+
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 45px;
+
+}
+
+/* IDENTITE DE MARQUE */
+
+.footer-brand {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.logo-orb {
+
+    width: 90px;
+    height: 90px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid #b88b4b;
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 15px rgba(184, 139, 75, 0.15);
+
+}
+
+.footer-logo {
+
+    width: 70px;
+    height: 70px;
+
+    object-fit: cover;
+    border-radius: 50%;
+
+    animation: rotateLogo 12s linear infinite;
+
+}
+
+@keyframes rotateLogo {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+.footer-brand h2 {
+
+    color: #d4af70;
+    letter-spacing: 5px;
+    font-size: 21px;
+
+}
+
+.brand-description {
+
+    color: #b7a58d;
+    font-size: 13px;
+    font-style: italic;
+
+}
+
+/* CONTACT */
+
+.footer-section {
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.footer-section h3 {
+
+    color: #d4af70;
+    letter-spacing: 3px;
+    font-size: 14px;
+    margin-bottom: 5px;
+
+}
+
+.footer-section a {
+
+    color: #e9d8c2;
+    text-decoration: none;
+    font-size: 14px;
+
+    transition: 0.3s ease;
+
+}
+
+.footer-section a:hover {
+
+    color: #d4af70;
+    transform: translateY(-2px);
+
+}
+
+/* SIGNATURE */
+
+.footer-signature {
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.signature-text {
+
+    font-size: 14px;
+    color: #b7a58d;
+
+}
+
+.signature-name {
+
+    font-family: "Brush Script MT", cursive;
+    font-size: 38px;
+    font-style: italic;
+
+    color: #d4af70;
+
+    text-shadow:
+        0 0 12px rgba(212, 175, 112, 0.25);
+
+}
+
+.signature-date {
+
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #95836c;
+
+}
+
+/* SEPARATEUR */
+
+.footer-line {
+
+    max-width: 1100px;
+    width: 100%;
+
+    height: 1px;
+    margin: 35px auto 20px;
+
+    background: linear-gradient(
+        to right,
+        transparent,
+        #b88b4b,
+        transparent
+    );
+
+}
+
+/* BAS DU FOOTER */
+
+.footer-bottom {
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    max-width: 1100px;
+    margin: auto;
+
+    color: #95836c;
+    font-size: 11px;
+
+}
+
+/* RESPONSIVE MOBILE */
+
+@media screen and (max-width: 600px) {
+
+    .main-footer {
+
+        padding: 40px 20px 20px;
+
+    }
+
+    .footer-content {
+
+        flex-direction: column;
+        gap: 35px;
+
+    }
+
+    .footer-bottom {
+
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+
+    }
+
+}

@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BabyShower - Administration</title>
+
+    <link rel="stylesheet" href="../CSS/dashboard.css">
+
+    
+</head>
+
+<body>
+
+    <header class="dashboard-header">
+
+        <div class="brand">BabyShower ♡</div>
+
+        <button
+            type="button"
+            id="btnDeconnexion"
+            class="logout-button">
+            Se déconnecter
+        </button>
+
+    </header>
+
+
+    <div id="chargement">
+        Préparation de votre espace...
+    </div>
+
+    <div id="messageErreur" role="alert" hidden></div>
+
+
+    <main id="contenuDashboard" class="dashboard-main" hidden>
+
+        <section class="welcome">
+
+            <h1>Bonjour et bienvenue ! ♡</h1>
+
+            <p>
+                Retrouvez ici toutes les informations et les outils
+                nécessaires à l'organisation de votre BabyShower.
+            </p>
+
+        </section>
+
+
+        <section>
+
+            <h2 class="section-title">Vue d'ensemble</h2>
+
+            <div class="statistics">
+
+                <article class="stat-card">
+                    <span class="stat-icon">♡</span>
+                    <strong class="stat-number" id="totalInvites">—</strong>
+                    <span class="stat-label">Invités inscrits</span>
+                </article>
+
+                <article class="stat-card">
+                    <span class="stat-icon">🎁</span>
+                    <strong class="stat-number" id="totalReservations">—</strong>
+                    <span class="stat-label">Réservations</span>
+                </article>
+
+                <article class="stat-card">
+                    <span class="stat-icon">🧸</span>
+                    <strong class="stat-number" id="totalCadeaux">—</strong>
+                    <span class="stat-label">Cadeaux au catalogue</span>
+                </article>
+
+                <article class="stat-card">
+                    <span class="stat-icon">💌</span>
+                    <strong class="stat-number" id="totalSouhaits">—</strong>
+                    <span class="stat-label">Souhaits reçus</span>
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <section>
+
+            <h2 class="section-title">Gestion de la BabyShower</h2>
+
+            <div class="management-grid">
+
+                <a href="invites.html" class="management-card">
+                    <div class="management-icon">👥</div>
+                    <h3>Gestion des invités</h3>
+                    <p>
+                        Consulter les inscriptions et retrouver
+                        les informations des invités.
+                    </p>
+                    <span class="arrow">→</span>
+                </a>
+
+                <a href="reservations.html" class="management-card">
+                    <div class="management-icon">🎁</div>
+                    <h3>Gestion des réservations</h3>
+                    <p>
+                        Suivre les cadeaux réservés et consulter
+                        les dates de réservation.
+                    </p>
+                    <span class="arrow">→</span>
+                </a>
+
+                <a href="cadeaux.html" class="management-card">
+                    <div class="management-icon">🧸</div>
+                    <h3>Gestion des cadeaux</h3>
+                    <p>
+                        Consulter la liste des cadeaux et gérer
+                        les articles proposés.
+                    </p>
+                    <span class="arrow">→</span>
+                </a>
+
+                <a href="souhaits.html" class="management-card">
+                    <div class="management-icon">💌</div>
+                    <h3>Messages et souhaits</h3>
+                    <p>
+                        Découvrir les petits messages laissés
+                        par les invités.
+                    </p>
+                    <span class="arrow">→</span>
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+     <!-- FOOTER -->
+    <footer class="main-footer">
+
+        <div class="footer-content">
+
+            <!-- IDENTITÉ -->
+            <div class="footer-brand">
+
+                <div class="logo-orb">
+                    <img
+                        src="../images/Monogramme calligraphique doré sur noir.png"
+                        alt="Logo ELY&BRI"
+                        class="footer-logo"
+                    >
+                </div>
+
+                <h2>ELY&BRI</h2>
+
+                <p class="brand-description">
+                    S'amuser en créant ♡
+                </p>
+
+            </div>
+
+
+            <!-- CONTACT -->
+            <div class="footer-section">
+
+                <h3>RESTONS EN CONTACT</h3>
+
+                <a href="mailto:ebikie4@gmail.com">
+                    ✉ ebikie4@gmail.com
+                </a>
+
+                <a
+                    href="https://github.com/brinahfah"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    ♧ Retrouvez-nous sur GitHub
+                </a>
+
+            </div>
+
+
+            <!-- SIGNATURE -->
+            <div class="footer-signature">
+
+                <p class="signature-text">
+                    Chaque détail compte,
+                    chaque instant est précieux.
+                </p>
+
+                <span class="signature-name">
+                    ELY&BRI
+                </span>
+
+                <p class="signature-date">
+                    DESIGN • CRÉATIVITÉ • ANIMATION
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-line"></div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 ELY&BRI — Tous droits réservés.
+            </p>
+
+            <p>
+                Fait avec ♡ et beaucoup de créativité.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <script type="module" src="../JS/dashboard.js"></script>
+
+</body>
+</html>

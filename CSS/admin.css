@@ -1,0 +1,621 @@
+
+/* =====================================
+   ELY&BRI - ESPACE DE CONNEXION
+===================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --cream: #f5eee5;
+    --ivory: #fffdf9;
+    --white: #ffffff;
+    --nude: #c9ad91;
+    --champagne: #b89570;
+    --taupe: #8f755d;
+    --brown: #59483b;
+    --text: #55483e;
+    --muted: #998b7d;
+    --border: #e9dfd4;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 10% 15%,
+            rgba(214, 190, 164, 0.22),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(214, 190, 164, 0.18),
+            transparent 30%
+        ),
+        var(--cream);
+
+    color: var(--text);
+}
+
+
+/* =====================================
+   CONTENU PRINCIPAL
+===================================== */
+
+.page-main {
+    flex: 1;
+
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 55px 20px;
+}
+
+
+/* =====================================
+   CARTE DE CONNEXION
+===================================== */
+
+.login-container {
+    width: 100%;
+    max-width: 470px;
+
+    background: var(--ivory);
+
+    padding: 48px 42px;
+
+    border: 1px solid rgba(201, 173, 145, 0.35);
+    border-radius: 24px;
+
+    box-shadow:
+        0 15px 45px rgba(92, 71, 52, 0.07),
+        0 3px 10px rgba(92, 71, 52, 0.03);
+
+    position: relative;
+    overflow: hidden;
+}
+
+/* Petite décoration supérieure */
+
+.login-container::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: linear-gradient(
+        to right,
+        #e8d7c4,
+        #b89570,
+        #e8d7c4
+    );
+}
+
+
+/* =====================================
+   EN-TÊTE
+===================================== */
+
+.login-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.welcome-label {
+    display: inline-block;
+
+    color: var(--champagne);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 20px;
+}
+
+.decorative-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    color: var(--nude);
+    font-size: 19px;
+
+    margin-bottom: 17px;
+}
+
+.decorative-separator span {
+    width: 35px;
+    height: 1px;
+
+    background: #dfcdbb;
+}
+
+h1 {
+    font-family: Georgia, serif;
+
+    font-size: clamp(25px, 5vw, 30px);
+    font-weight: 400;
+
+    line-height: 1.35;
+
+    color: var(--brown);
+
+    margin-bottom: 15px;
+}
+
+.description {
+    max-width: 340px;
+
+    margin: auto;
+
+    color: var(--muted);
+
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+
+/* =====================================
+   FORMULAIRE
+===================================== */
+
+.form-group {
+    margin-bottom: 23px;
+}
+
+label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: var(--brown);
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    height: 51px;
+
+    padding: 0 16px;
+
+    background: #fff;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    color: var(--text);
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.3s ease;
+}
+
+input::placeholder {
+    color: #b9afa5;
+    font-size: 13px;
+}
+
+input:hover {
+    border-color: var(--nude);
+}
+
+input:focus {
+    border-color: var(--champagne);
+
+    box-shadow:
+        0 0 0 4px rgba(184, 149, 112, 0.12);
+}
+
+
+/* =====================================
+   BOUTON DE CONNEXION
+===================================== */
+
+button {
+    width: 100%;
+    min-height: 53px;
+
+    margin-top: 8px;
+
+    padding: 14px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #c9ad91,
+        #a98a6b
+    );
+
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    letter-spacing: 0.3px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px rgba(169, 138, 107, 0.20);
+
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(
+        135deg,
+        #b99a7c,
+        #917456
+    );
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(169, 138, 107, 0.25);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.button-arrow {
+    font-size: 19px;
+    transition: transform 0.3s ease;
+}
+
+button:hover .button-arrow {
+    transform: translateX(4px);
+}
+
+
+/* =====================================
+   MESSAGES DE CONNEXION
+===================================== */
+
+#message {
+    min-height: 20px;
+
+    margin-top: 17px;
+
+    text-align: center;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.error {
+    color: #bd6259;
+}
+
+.success {
+    color: #63866b;
+}
+
+
+/* =====================================
+   MESSAGE DE SECURITE
+===================================== */
+
+.security-note {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 25px;
+    padding-top: 20px;
+
+    border-top: 1px solid #eee6dd;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+.security-note span {
+    color: var(--champagne);
+    font-size: 16px;
+}
+
+
+/* =====================================
+   FOOTER ELY&BRI
+===================================== */
+
+ .main-footer {
+
+    width: 100%;
+    margin-top: auto;
+    padding: 45px 7% 20px;
+
+    background: #100e0c;
+    color: #e9d8c2;
+
+    text-align: center;
+
+    border-top: 1px solid rgba(184, 139, 75, 0.4);
+
+}
+
+
+/* CONTENU */
+
+.footer-content {
+    width: 100%;
+    max-width: 1150px;
+
+    margin: auto;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 40px;
+}
+
+
+/* IDENTITE */
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 9px;
+}
+
+.logo-orb {
+    width: 78px;
+    height: 78px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid #d4b99b;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    box-shadow: 0 0 20px rgba(212, 185, 155, 0.12);
+}
+
+.footer-logo {
+    width: 62px;
+    height: 62px;
+
+    object-fit: cover;
+    border-radius: 50%;
+
+    animation: rotateLogo 18s linear infinite;
+}
+
+@keyframes rotateLogo {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.footer-brand h2 {
+    color: #e5c9a8;
+
+    letter-spacing: 5px;
+    font-size: 20px;
+}
+
+.brand-description {
+    color: #d3c0ac;
+
+    font-size: 12px;
+    font-style: italic;
+}
+
+
+/* CONTACT */
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+.footer-section h3 {
+    color: #e5c9a8;
+
+    letter-spacing: 2px;
+    font-size: 12px;
+
+    margin-bottom: 5px;
+}
+
+.footer-section a {
+    color: #f5eee5;
+
+    text-decoration: none;
+    font-size: 13px;
+
+    transition: 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #e5c9a8;
+    transform: translateY(-2px);
+}
+
+
+/* SIGNATURE */
+
+.footer-signature {
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+.signature-text {
+    font-size: 12px;
+    line-height: 1.7;
+
+    color: #d3c0ac;
+}
+
+.signature-name {
+    font-family: "Brush Script MT", cursive;
+
+    font-size: 36px;
+    font-style: italic;
+
+    color: #e5c9a8;
+}
+
+.signature-date {
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+
+    color: #c4ad97;
+}
+
+
+/* SEPARATEUR */
+
+.footer-line {
+    max-width: 1100px;
+    width: 100%;
+
+    height: 1px;
+
+    margin: 30px auto 18px;
+
+    background: linear-gradient(
+        to right,
+        transparent,
+        #c9ad91,
+        transparent
+    );
+}
+
+
+/* COPYRIGHT */
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    color: #cdbba8;
+
+    font-size: 10px;
+}
+
+
+/* =====================================
+   RESPONSIVE TABLETTE ET MOBILE
+===================================== */
+
+@media screen and (max-width: 700px) {
+
+    .page-main {
+        padding: 40px 18px;
+    }
+
+    .login-container {
+        max-width: 440px;
+        padding: 40px 25px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .main-footer {
+        padding: 35px 20px 20px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+}
+
+@media screen and (max-width: 380px) {
+
+    .login-container {
+        padding: 35px 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .description {
+        font-size: 13px;
+    }
+
+}
+
+
+/* ACCESSIBILITE */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+
+}
