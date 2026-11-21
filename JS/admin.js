@@ -35,7 +35,7 @@ const guideTip = document.getElementById("guideTip");
 
 // TEST : true = le guide apparaît à chaque connexion.
 // VERSION FINALE : passer cette valeur à false.
-const MODE_TEST = true;
+
 
 let etapeActuelle = 0;
 let utilisateurEnAttente = null;
@@ -177,8 +177,8 @@ async function terminerGuide() {
 
     redirectionEnCours = true;
 
-    // En version finale, on mémorise que le guide a été vu.
-    if (!MODE_TEST && utilisateurEnAttente) {
+    // Mémoriser que cet utilisateur a terminé le guide
+    if (utilisateurEnAttente) {
         localStorage.setItem(
             `guideBabyShower_${utilisateurEnAttente.id}`,
             "termine"
@@ -190,7 +190,6 @@ async function terminerGuide() {
 
     window.location.replace("dashboard.html");
 }
-
 // ======================================
 // NAVIGATION ENTRE LES ÉTAPES
 // ======================================
@@ -219,21 +218,24 @@ btnFermerGuide.addEventListener("click", terminerGuide);
 // ======================================
 
 function afficherGuideAvantDashboard(user) {
+
     utilisateurEnAttente = user;
 
     const cleGuide = `guideBabyShower_${user.id}`;
 
-    // En mode test, on affiche toujours le guide.
-    // En version finale, on vérifie s'il a déjà été vu.
+    // Vérifier si l'utilisateur a déjà terminé le guide
     const guideDejaVu =
-        !MODE_TEST &&
         localStorage.getItem(cleGuide) === "termine";
 
     if (guideDejaVu) {
+
+        // Accès direct au tableau de bord
         window.location.replace("dashboard.html");
+
         return;
     }
 
+    // Première connexion : afficher le guide
     ouvrirGuide();
 }
 
