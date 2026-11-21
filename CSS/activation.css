@@ -1,0 +1,385 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Segoe UI", sans-serif;
+    background: #f5eee5;
+    color: #554638;
+}
+
+.activation-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+.activation-container {
+    width: 100%;
+    max-width: 480px;
+    padding: 45px 35px;
+    background: #fffdf9;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 12px 40px rgba(91, 68, 45, 0.10);
+}
+
+.activation-decoration {
+    font-size: 42px;
+    color: #bd9b69;
+    margin-bottom: 15px;
+}
+
+.activation-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #ad9068;
+}
+
+h1 {
+    margin: 22px 0 15px;
+    font-family: Georgia, serif;
+    font-size: 29px;
+    font-weight: normal;
+    color: #66513d;
+}
+
+.activation-description {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #827568;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #e4d9ca;
+    border-radius: 9px;
+    background: #fff;
+    color: #554638;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    border-color: #b99a70;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 9px;
+    background: #a88a62;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #90724d;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+button span {
+    margin-left: 8px;
+}
+
+.activation-message {
+    min-height: 25px;
+    margin-top: 20px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.activation-message.success {
+    color: #397b50;
+}
+
+.activation-message.error {
+    color: #b34c4c;
+}
+
+.security-note {
+    margin-top: 25px;
+    font-size: 12px;
+    color: #a28d75;
+}
+
+@media (max-width: 480px) {
+    .activation-container {
+        padding: 35px 22px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+}
+
+/* =================================
+   FOOTER ELY&BRI
+================================= */
+
+.main-footer {
+
+    width: 100%;
+    margin-top: auto;
+    padding: 45px 7% 20px;
+
+    background: #100e0c;
+    color: #e9d8c2;
+
+    text-align: center;
+
+    border-top: 1px solid rgba(184, 139, 75, 0.4);
+
+}
+
+/* CONTENU PRINCIPAL */
+
+.footer-content {
+
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 45px;
+
+}
+
+/* IDENTITE DE MARQUE */
+
+.footer-brand {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.logo-orb {
+
+    width: 90px;
+    height: 90px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid #b88b4b;
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 15px rgba(184, 139, 75, 0.15);
+
+}
+
+.footer-logo {
+
+    width: 70px;
+    height: 70px;
+
+    object-fit: cover;
+    border-radius: 50%;
+
+    animation: rotateLogo 12s linear infinite;
+
+}
+
+@keyframes rotateLogo {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+.footer-brand h2 {
+
+    color: #d4af70;
+    letter-spacing: 5px;
+    font-size: 21px;
+
+}
+
+.brand-description {
+
+    color: #b7a58d;
+    font-size: 13px;
+    font-style: italic;
+
+}
+
+/* CONTACT */
+
+.footer-section {
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.footer-section h3 {
+
+    color: #d4af70;
+    letter-spacing: 3px;
+    font-size: 14px;
+    margin-bottom: 5px;
+
+}
+
+.footer-section a {
+
+    color: #e9d8c2;
+    text-decoration: none;
+    font-size: 14px;
+
+    transition: 0.3s ease;
+
+}
+
+.footer-section a:hover {
+
+    color: #d4af70;
+    transform: translateY(-2px);
+
+}
+
+/* SIGNATURE */
+
+.footer-signature {
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.signature-text {
+
+    font-size: 14px;
+    color: #b7a58d;
+
+}
+
+.signature-name {
+
+    font-family: "Brush Script MT", cursive;
+    font-size: 38px;
+    font-style: italic;
+
+    color: #d4af70;
+
+    text-shadow:
+        0 0 12px rgba(212, 175, 112, 0.25);
+
+}
+
+.signature-date {
+
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #95836c;
+
+}
+
+/* SEPARATEUR */
+
+.footer-line {
+
+    max-width: 1100px;
+    width: 100%;
+
+    height: 1px;
+    margin: 35px auto 20px;
+
+    background: linear-gradient(
+        to right,
+        transparent,
+        #b88b4b,
+        transparent
+    );
+
+}
+
+/* BAS DU FOOTER */
+
+.footer-bottom {
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    max-width: 1100px;
+    margin: auto;
+
+    color: #95836c;
+    font-size: 11px;
+
+}
+
+/* RESPONSIVE MOBILE */
+
+@media screen and (max-width: 600px) {
+
+    .main-footer {
+
+        padding: 40px 20px 20px;
+
+    }
+
+    .footer-content {
+
+        flex-direction: column;
+        gap: 35px;
+
+    }
+
+    .footer-bottom {
+
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+
+    }
+
+}

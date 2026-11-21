@@ -112,7 +112,11 @@ function obtenirLimite(cadeau) {
         nom.includes("poussette") ||
         nom.includes("siege auto") ||
         nom.includes("sac de maternite") ||
-        (nom.includes("tapis") && nom.includes("eveil"))
+        nom.includes("tapis") &&
+        (
+            nom.includes("veille") ||
+            nom.includes("eveil")
+        )
     ) {
         return 1;
     }
