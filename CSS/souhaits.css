@@ -37,6 +37,20 @@ body {
     var(--cream);
 }
 
+.back-button {
+    text-decoration: none;
+    color: var(--text);
+    font-size: 14px;
+    border: 1px solid var(--border);
+    padding: 10px 17px;
+    border-radius: 25px;
+    transition: 0.2s;
+}
+
+.back-button:hover {
+    background: var(--beige);
+}
+
 button,
 input {
   font: inherit;
