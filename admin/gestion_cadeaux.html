@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gestion des cadeaux - BabyShower</title>
+
+    <link rel="stylesheet" href="../CSS/gestion_cadeaux.css">
+</head>
+
+<body>
+
+    <header class="page-header">
+        <a href="dashboard.html" class="brand">BabyShower ♡</a>
+
+        <a href="dashboard.html" class="back-button">
+            ← Tableau de bord
+        </a>
+    </header>
+
+    <main class="main-container">
+
+        <section class="page-intro">
+
+            <span class="eyebrow">ESPACE ADMINISTRATION</span>
+
+            <h1>Gestion des cadeaux</h1>
+
+            <p>
+                Retrouvez et gérez les cadeaux proposés
+                aux invités de votre Baby Shower.
+            </p>
+
+        </section>
+
+        <section class="statistics">
+
+            <article class="stat-card">
+                <span class="stat-icon">🎁</span>
+                <strong id="totalCadeaux">—</strong>
+                <span>Total des cadeaux</span>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-icon">♡</span>
+                <strong id="totalReserves">—</strong>
+                <span>Réservations effectuées</span>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-icon">✧</span>
+                <strong id="totalDisponibles">—</strong>
+                <span>Cadeaux disponibles</span>
+            </article>
+
+        </section>
+
+        <section class="management-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Catalogue des cadeaux</h2>
+                    <p>Gérez les articles proposés aux invités.</p>
+                </div>
+
+                
+
+            </div>
+
+            <div id="formulaireContainer" class="form-container" hidden>
+
+                <div class="form-heading">
+                    <h3 id="titreFormulaire">Ajouter un cadeau</h3>
+                    <button
+                        type="button"
+                        id="btnFermerFormulaire"
+                        class="close-button"
+                        aria-label="Fermer">
+                        ×
+                    </button>
+                </div>
+
+                <form id="formCadeau">
+
+                    <div class="form-group">
+                        <label for="nomCadeau">Nom du cadeau</label>
+
+                        <input
+                            type="text"
+                            id="nomCadeau"
+                            maxlength="150"
+                            placeholder="Exemple : Poussette"
+                            required>
+                    </div>
+
+                    <div id="messageFormulaire"
+                         class="form-message"
+                         role="alert"
+                         hidden>
+                    </div>
+
+                    <div class="form-actions">
+
+                        <button
+                            type="button"
+                            id="btnAnnuler"
+                            class="secondary-button">
+                            Annuler
+                        </button>
+
+                        <button
+                            type="submit"
+                            id="btnEnregistrer"
+                            class="primary-button">
+                            Enregistrer
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="search-container">
+
+                <input
+                    type="search"
+                    id="rechercheCadeau"
+                    placeholder="Rechercher un cadeau..."
+                    aria-label="Rechercher un cadeau">
+
+            </div>
+
+            <div id="chargement" class="loading">
+                Chargement du catalogue...
+            </div>
+
+            <div id="messageGlobal"
+                 class="global-message"
+                 role="alert"
+                 hidden>
+            </div>
+
+            <div id="listeVide" class="empty-state" hidden>
+                <span>🎁</span>
+                <h3>Aucun cadeau trouvé</h3>
+                <p>Essayez une autre recherche ou ajoutez un cadeau.</p>
+            </div>
+
+            <div class="table-container" id="tableContainer" hidden>
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Cadeau</th>
+                            <th>Réservations</th>
+                            <th>Disponibilité</th>
+                            <th>Ajouté le</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tableauCadeaux"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+
+            <div class="footer-content">
+
+                <!-- LOGO -->
+                <div class="footer-brand">
+
+                    <div class="logo-orb">
+                        <img
+                            src="../images/Monogramme calligraphique doré sur noir.png"
+                            alt="Logo ELY&BRI"
+                            class="footer-logo"
+                        >
+                    </div>
+
+                    <h2>ELY&BRI</h2>
+
+                    <p class="brand-description">
+                        S'amuser en créant 
+                    </p>
+
+                </div>
+
+                <!-- CONTACT -->
+                <div class="footer-section">
+
+                    <h3>CONTACT</h3>
+
+                    <a href="https://mail.google.com/mail/u/0/#inbox">
+                        ✉ ebikie4@gmail.com
+                    </a>
+
+                    <a href="https://github.com/brinahfah"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                        ♧ GitHub
+                    </a>
+
+                </div>
+
+                <!-- SIGNATURE -->
+                <div class="footer-signature">
+
+                    <p class="signature-text">
+                        Créé avec passion
+                    </p>
+
+                    <span class="signature-name">
+                        ELY&BRI
+                    </span>
+
+                    <p class="signature-date">
+                        Design • Créativité • Animation
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- SEPARATEUR -->
+            <div class="footer-line"></div>
+
+            <!-- COPYRIGHT -->
+            <div class="footer-bottom">
+
+                <p>© 2026 ELY&BRI — Tous droits réservés.</p>
+
+                <p>Fait avec ♡ et beaucoup de créativité.</p>
+
+            </div>
+
+    </footer>
+
+    <script type="module" src="../JS/gestions_cadeaux.js"></script>
+
+</body>
+</html>

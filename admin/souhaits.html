@@ -1,178 +1,201 @@
-
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>BabyShower - Livre d'or</title>
-
-    <link rel="stylesheet" href="../CSS/souhaits.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8f3ec">
+  <title>Notre livre de souvenirs | ELY&BRI</title>
+  <link rel="stylesheet" href="../CSS/souhaits.css">
 </head>
 
 <body>
+  <div class="site-shell">
 
-    <header class="souhaits-header">
-        <a href="dashboard.html" class="retour-dashboard">
-            ← Tableau de bord
-        </a>
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="ELY&BRI">
+        <span class="brand-subtitle">Un petit monde rempli d'amour</span>
+      </a>
 
-        <div class="brand">BabyShower ♡</div>
-
-        <div class="header-label">Livre d'or</div>
+      <div class="header-decoration" aria-hidden="true">
+        <span>✦</span>
+        <span>♡</span>
+        <span>✦</span>
+      </div>
     </header>
 
-    <main class="souhaits-container">
+    <main class="main-content">
+      <section class="intro-section">
+        <span class="eyebrow">Baby Shower · Nos précieux souvenirs</span>
+        <h1>Un livre rempli d'amour</h1>
+        <p class="intro-text">
+          Chaque petit mot est un souvenir, chaque attention une douceur
+          que nous garderons précieusement.
+        </p>
+        <div class="intro-ornament" aria-hidden="true">♡</div>
+      </section>
 
-        <section class="page-intro">
-            <span class="intro-decoration">✧</span>
-            <h1>Le livre de vos souvenirs</h1>
-            <p>Les petits mots précieux laissés par vos invités.</p>
-        </section>
-
-        <section class="livre-toolbar">
-
-            <input
-                type="search"
-                id="rechercheSouhait"
-                placeholder="Retrouver un invité ou un message..."
-                aria-label="Rechercher un message"
-            >
-
-            <button type="button" id="btnActualiser" class="btn-page">
-                ↻ Actualiser
-            </button>
-
-            <span id="totalSouhaits" class="total-souhaits">
-                0 message
-            </span>
-
-        </section>
-
-        <div id="messageChargement" class="message-etat">
-            Ouverture du livre...
+      <section class="toolbar" aria-label="Outils du livre d'or">
+        <div class="search-wrapper">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Rechercher un prénom, un nom ou un message…"
+            autocomplete="off"
+            aria-label="Rechercher dans les messages"
+          >
+          <button id="clearSearch" class="clear-search" type="button"
+            aria-label="Effacer la recherche" hidden>×</button>
         </div>
 
-        <div id="messageErreur" class="message-erreur" hidden></div>
+        <button id="refreshButton" class="refresh-button" type="button">
+          <span aria-hidden="true">↻</span>
+          Actualiser
+        </button>
+      </section>
 
-        <section id="livre" class="livre" hidden>
+      <div id="statusMessage" class="status-message" role="status"
+        aria-live="polite">Chargement de vos souvenirs…</div>
 
-            <div class="livre-pages">
+      <section class="book-section" aria-label="Livre de souvenirs">
+        <!-- Couverture du livre d'or -->
+        <button
+        type="button"
+        class="book-cover"
+        id="bookCover"
+        aria-label="Ouvrir le livre d'or"
+        >
+        <span class="cover-corner cover-corner-top">♡</span>
+        <span class="cover-corner cover-corner-bottom">♡</span>
 
-                <!-- PAGE GAUCHE -->
-                <div class="page page-gauche">
+        <span class="cover-decoration cover-heart-left" aria-hidden="true">♡</span>
+        <span class="cover-decoration cover-heart-right" aria-hidden="true">♥</span>
 
-                    <div class="page-gauche-contenu">
+        <span class="cover-teddy cover-teddy-left" aria-hidden="true">🧸</span>
+        <span class="cover-teddy cover-teddy-right" aria-hidden="true">🧸</span>
 
-                        <span class="ornement">✧</span>
+        <span class="cover-small-text">Un jour rempli d'amour</span>
 
-                        <p class="petit-titre">BabyShower</p>
+        <span class="cover-title">Livre d'or</span>
+        <span class="cover-names">Morgane <span>&</span> Emery</span>
 
-                        <h2>
-                            Un livre rempli
-                            de tendresse
-                        </h2>
+        <span class="cover-message">
+            Nos plus beaux souvenirs<br>
+            commencent avec vous
+        </span>
 
-                        <div class="separateur">♡</div>
+        <span class="cover-flower" aria-hidden="true">✿</span>
 
-                        <p class="texte-intro">
-                            Chaque mot, chaque pensée et chaque
-                            attention rendent cette aventure
-                            encore plus belle.
-                        </p>
-
-                        <p class="texte-intro">
-                            Merci à tous ceux qui partagent
-                            ce joli moment avec nous.
-                        </p>
-
-                        <span class="signature-livre">
-                            Avec amour ♡
-                        </span>
-
-                        <span class="numero-page-gauche">ELY&BRI</span>
-
-                    </div>
-
-                </div>
-
-                <!-- PAGE DROITE -->
-                <div class="page page-droite" id="pageMessage">
-
-                    <div class="page-droite-contenu">
-
-                        <span class="petit-titre">
-                            UN PETIT MOT POUR VOUS
-                        </span>
-
-                        <div class="ornement-haut">❦</div>
-
-                        <p id="texteMessage" class="texte-message"></p>
-
-                        <div class="signature">
-                            <span class="signature-label">
-                                Avec toute mon affection,
-                            </span>
-
-                            <strong id="nomInvite"></strong>
-                        </div>
-
-                        <div class="date-message">
-                            <span id="dateSouhait"></span>
-                        </div>
-
-                        <span id="numeroPage" class="numero-page">
-                            1 / 1
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <div id="messageVide" class="message-vide" hidden>
-            <span>♡</span>
-            <h2>Les pages sont encore vierges</h2>
-            <p>
-                Les messages de vos invités apparaîtront ici
-                lorsqu'ils auront laissé un petit mot.
-            </p>
+        <span class="cover-open">
+            Ouvrir notre livre <span aria-hidden="true">♡</span>
+        </span>
+        </button>
+        <div class="book-topline">
+          <span class="book-caption">Nos mots doux, à feuilleter sans fin</span>
+          <span id="messageCount" class="message-count"></span>
         </div>
 
-        <!-- NAVIGATION DU LIVRE -->
-        <section id="navigationLivre" class="navigation-livre" hidden>
+        <!-- Version ordinateur : livre ouvert, deux messages -->
+        <div id="desktopBook" class="book desktop-book" aria-live="polite">
+          <div class="book-spine" aria-hidden="true"></div>
 
-            <button
-                type="button"
-                id="pagePrecedente"
-                class="btn-page"
-                aria-label="Page précédente"
-            >
-                ← Précédent
-            </button>
+          <article id="desktopLeftPage" class="paper-page left-page">
+            <div class="page-content"></div>
+          </article>
 
-            <span id="compteurPages" class="compteur-pages">
-                1 / 1
-            </span>
+          <article id="desktopRightPage" class="paper-page right-page">
+            <div class="page-content"></div>
+          </article>
 
-            <button
-                type="button"
-                id="pageSuivante"
-                class="btn-page"
-                aria-label="Page suivante"
-            >
-                Suivant →
-            </button>
+          <div id="desktopFlipLayer" class="flip-layer" aria-hidden="true">
+            <div class="flip-face flip-front"></div>
+            <div class="flip-face flip-back"></div>
+          </div>
+        </div>
 
-        </section>
+        <!-- Version mobile : une seule page -->
+        <div id="mobileBook" class="book mobile-book" aria-live="polite">
+          <article id="mobilePage" class="paper-page mobile-page">
+            <div class="page-content"></div>
+          </article>
 
+          <div id="mobileFlipLayer" class="flip-layer" aria-hidden="true">
+            <div class="flip-face flip-front"></div>
+            <div class="flip-face flip-back"></div>
+          </div>
+        </div>
+
+        <div id="emptyState" class="empty-state" hidden>
+          <span class="empty-icon" aria-hidden="true">♡</span>
+          <h2>Aucun petit mot pour le moment</h2>
+          <p>Les messages apparaîtront ici dès qu'ils seront disponibles.</p>
+        </div>
+
+        <div id="errorState" class="error-state" hidden>
+          <span aria-hidden="true">☁</span>
+          <p>Impossible de charger les souvenirs pour le moment.</p>
+          <button id="retryButton" class="text-button" type="button">
+            Réessayer
+          </button>
+        </div>
+
+        <nav class="book-navigation" aria-label="Navigation du livre">
+          <button id="previousButton" class="nav-button" type="button"
+            aria-label="Page précédente" disabled>
+            <span aria-hidden="true">←</span>
+            <span class="nav-label">Précédent</span>
+          </button>
+
+          <span id="pageIndicator" class="page-indicator">—</span>
+
+          <button id="nextButton" class="nav-button" type="button"
+            aria-label="Page suivante" disabled>
+            <span class="nav-label">Suivant</span>
+            <span aria-hidden="true">→</span>
+          </button>
+        </nav>
+      </section>
     </main>
-     
-    <footer class="main-footer">
+
+  </div>
+
+  <!-- Page de remerciement statique : indépendante de Supabase -->
+  <template id="thankYouTemplate">
+    <bn class="thank-you-inner">
+      <div class="thank-you-decoration decoration-top" aria-hidden="true">
+        ✧　♡　✧
+      </div>
+
+      <span class="thank-you-eyebrow">Un dernier petit mot</span>
+      <h2>Beaucoup d'amour chers parents</h2>
+
+      <div class="thank-you-divider" aria-hidden="true">
+        <span></span> ♡ <span></span>
+      </div>
+
+      <p class="thank-you-message">
+        Ce petit site est pour te montrer tout mon soutient et mon amour, c'est avec joie que je l'ai fait et passion!
+        Je bénis le Seigneur de l'arrivée de mon héritier et je suis heureuse, ravi et impassiente de voir la maman extraordinaire 
+        que tu seras.
+        Je souhaite à Emery et à toi tous le bonheur et l'amour d'être parent de mon héritier que le Seigneur vous bénisse
+        et vous accompagne dans cette nouvelle histoire;
+
+      </p></bn>
+
+       <p class="thank-you-message"> Ps: Bisous à toi mon Mory je t'aime déjà beaucoup sache que c'est moi ta première fan❤️</p>
+
+      <p class="thank-you-signature">
+        Avec toute mon affection,<br>
+        <strong>Elisha Bri</strong>
+      </p>
+
+      <div class="thank-you-decoration decoration-bottom" aria-hidden="true">
+        ☾　✧　♡
+      </div>
+    </div>
+  </template>
+
+  <footer class="main-footer">
 
             <div class="footer-content">
 
@@ -245,12 +268,6 @@
 
     </footer>
 
-    <script type="module" src="../JS/souhaits.js"></script>
-
+  <script type="module" src="../JS/souhaits.js"></script>
 </body>
 </html>
-
-
-    
-
-  
